@@ -1,0 +1,6 @@
+
+/backend/__pycache__
+/backend/migrations/__pycache__
+/backend/migrations
+/backend/venv
+/frontend/node_modules
