@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Hls from "hls.js";
 
 function StreamViewer() {
@@ -77,7 +77,8 @@ function StreamViewer() {
       ) : (
         <p>The stream is not live at the moment.</p>
       )}
-      
+      <br />
+      <Link to={`/chat/${id}`}>Join Chat</Link>
     </div>
   );
 }

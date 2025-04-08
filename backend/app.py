@@ -112,7 +112,7 @@ def create_app():
             'tags': stream.tags,
             'is_live': stream.is_live,
             'channel_info': stream.channel_info,
-            'stream_url': stream.stream_url  # Added stream_url field
+            'stream_url': stream.stream_url
         }
         return jsonify(result), 200
 
@@ -145,17 +145,9 @@ def create_app():
         username = data.get('username')
         user = User.query.filter_by(username=username).first()
         user_id = user.user_id
-        # if request.method == 'PUT':
-        #     user.profile_picture = data.get('profile_picture', user.profile_picture)
-        #     user.bio = data.get('bio', user.bio)
-        #     db.session.commit()
-        #     return jsonify({'msg': 'Profile updated'}), 200
         if request.method == 'PUT':
             try:
-                # Forcing JSON parsing can help if Content-Type is not set correctly.
                 data = request.get_json(force=True)
-                # Log the received data (optional, remove in production)
-                app.logger.info("Updating profile for user %s: %s", user_id, data)
                 user.profile_picture = data.get('profile_picture', user.profile_picture)
                 user.bio = data.get('bio', user.bio)
                 db.session.commit()
@@ -196,6 +188,7 @@ def create_app():
             socketio.emit('chat', {
                 'stream_id': stream_id,
                 'user_id': user.id,
+                'username': username,
                 'message': message_text,
                 'timestamp': chat_message.timestamp.isoformat()
             }, room=f'stream_{stream_id}')
@@ -205,6 +198,9 @@ def create_app():
             result = [{
                 'id': m.id,
                 'user_id': m.user_id,
+                # If m.sender exists, you might return m.sender.username;
+                # otherwise, fallback to "Unknown" or similar.
+                'username': m.sender.username if m.sender else 'Unknown',
                 'message': m.message,
                 'timestamp': m.timestamp.isoformat()
             } for m in messages]
@@ -254,6 +250,20 @@ def create_app():
         stream.stream_url = hls_url
         db.session.commit()
         return jsonify({'msg': 'Stream is now live', 'stream_url': stream.stream_url}), 200
+    
+    @app.route('/stream/stop/<int:stream_id>', methods=['POST'])
+    def stop_stream(stream_id):
+        data = request.get_json()
+        username = data.get('username')
+        user = User.query.filter_by(username=username).first()
+        user_id = user.id
+        stream = Stream.query.get_or_404(stream_id)
+        if stream.streamer_id != user_id:
+            return jsonify({'msg': 'Unauthorized action'}), 403
+        stream.is_live = False
+        stream.stream_url = None
+        db.session.commit()
+        return jsonify({'msg': 'Stream has ended.'}), 200
     
     @app.route('/channel/customize', methods=['PUT'])
     def customize_channel():
@@ -359,18 +369,56 @@ def create_app():
         leave_room(room)
         emit('notification', {'message': f'User has left {room}'}, room=room)
 
+    # @socketio.on('chat')
+    # def handle_chat(data):
+    #     room = data.get('room')
+    #     message = data.get('message')
+    #     username = data.get('username')
+    #     user = User.query.filter_by(username=username).first()
+    #     timestamp = datetime.utcnow().isoformat()
+    #     # Emit the chat event, including the username
+    #     emit('chat', {
+    #         'room': room,
+    #         'user_id': user.id,
+    #         'username': username,
+    #         'message': message,
+    #         'timestamp': timestamp
+    #     }, room=room)
+
     @socketio.on('chat')
     def handle_chat(data):
-        room = data.get('room')
+        room = data.get('room')  # Expected format: "stream_<stream_id>"
         message = data.get('message')
-        user_id = data.get('user_id')
-        timestamp = datetime.utcnow().isoformat()
+        username = data.get('username')  # Provided from client-side localStorage
+        timestamp = datetime.utcnow()  # We'll use the DB record timestamp
+
+        # Optional: Log incoming data.
+        app.logger.info("Received chat: %s from %s in room %s", message, username, room)
+        
+        # Look up the user by username.
+        user = User.query.filter_by(username=username).first()
+        user_id = user.id if user else None
+
+        # Extract the stream_id from the room string: "stream_<id>"
+        try:
+            stream_id = int(room.replace("stream_", ""))
+        except Exception as e:
+            app.logger.error("Could not extract stream id from room %s: %s", room, str(e))
+            return
+
+        # Create and save the chat message to the database.
+        chat_message = ChatMessage(stream_id=stream_id, user_id=user_id, message=message)
+        db.session.add(chat_message)
+        db.session.commit()
+
+        # Emit the chat message, using the saved timestamp from the database.
         emit('chat', {
             'room': room,
-            'user_id': user_id,
+            'username': username,
             'message': message,
-            'timestamp': timestamp
+            'timestamp': chat_message.timestamp.isoformat()
         }, room=room)
+
 
     return app
 
