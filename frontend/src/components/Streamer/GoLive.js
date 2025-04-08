@@ -11,30 +11,6 @@ function GoLive() {
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('username')
 
-  useEffect(() => {
-    console.log("videoRef.current:", videoRef.current);
-  }, []);
-
-  useEffect(() => {
-    // Request webcam and microphone access for local preview
-    async function startVideo() {
-      try {
-        const mediaStream = await navigator.mediaDevices.getUserMedia({ });
-        if (videoRef.current) {
-          videoRef.current.srcObject = mediaStream;
-        }
-      } catch (err) {
-        console.error("Error accessing media devices.", err);
-      }
-    }
-    startVideo();
-    return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        videoRef.current.srcObject.getTracks().forEach(track => track.stop());
-      }
-    };
-  }, []);
-
   const rtmpUrl = `rtmp://localhost/live`;
   const streamKey = `stream_${streamId}`;
 
@@ -60,13 +36,6 @@ function GoLive() {
   return (
     <div>
       <h2>Go Live</h2>
-      <video 
-        ref={videoRef} 
-        autoPlay 
-        muted 
-        style={{ width: '640px', height: '480px', backgroundColor: '#000' }} 
-      />
-      <br />
       <p>Configure OBS as follows:</p>
       <p>RTMP URL: <strong>{rtmpUrl}</strong></p>
       <p>Stream Key: <strong>{streamKey}</strong></p>
