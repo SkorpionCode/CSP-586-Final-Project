@@ -6,13 +6,15 @@ import { useNavigate } from 'react-router-dom';
 function BecomeStreamer() {
   const token = localStorage.getItem('token');
   const history = useNavigate();
+  const username = localStorage.getItem('username');
 
   const handleBecomeStreamer = async () => {
     try {
-      await axios.post('http://localhost:5000/become-streamer', {}, {
+      await axios.post('http://localhost:5000/become-streamer', {username}, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       alert('You are now a streamer!');
+      localStorage.setItem('role', 'streamer')
       history.push('/stream-setup');
     } catch (error) {
       alert('Error becoming a streamer');

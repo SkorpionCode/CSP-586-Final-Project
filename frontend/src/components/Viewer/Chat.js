@@ -8,6 +8,7 @@ function Chat() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const token = localStorage.getItem('token');
+  const username = localStorage.getItem('username');
 
   const fetchMessages = useCallback(() => {
     axios.get(`http://localhost:5000/chat/${streamId}`, {
@@ -25,7 +26,7 @@ function Chat() {
 
   const handleSend = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:5000/chat/${streamId}`, { message }, {
+    axios.post(`http://localhost:5000/chat/${streamId}`, { username ,message }, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     .then(() => {
@@ -41,7 +42,7 @@ function Chat() {
       <div style={{ border: '1px solid #ccc', padding: '10px', height: '300px', overflowY: 'scroll' }}>
         {messages.map((msg, index) => (
           <div key={index}>
-            <strong>User {msg.user_id}:</strong> {msg.message} <em>{new Date(msg.timestamp).toLocaleTimeString()}</em>
+            <strong>{msg.username}:</strong> {msg.message} <em>{new Date(msg.timestamp).toLocaleTimeString()}</em>
           </div>
         ))}
       </div>

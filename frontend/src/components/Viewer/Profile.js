@@ -5,6 +5,9 @@ import axios from 'axios';
 function Profile() {
   const [profile, setProfile] = useState({});
   const token = localStorage.getItem('token');
+  const username = localStorage.getItem('username')
+  const email = localStorage.getItem('email')
+  const role = localStorage.getItem('role')
 
   useEffect(() => {
     axios.get('http://localhost:5000/profile', {
@@ -18,7 +21,7 @@ function Profile() {
     e.preventDefault();
     try {
       await axios.put('http://localhost:5000/profile', profile, {
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }
       });
       alert('Profile updated!');
     } catch (error) {
@@ -34,8 +37,9 @@ function Profile() {
     <div>
       <h2>Your Profile</h2>
       <form onSubmit={handleUpdate}>
-        <p>Username: {profile.username}</p>
-        <p>Email: {profile.email}</p>
+        <p>Username: {username}</p>
+        <p>Email: {email}</p>
+        <p>Role: {role}</p>
         <label>
           Profile Picture URL:
           <input 

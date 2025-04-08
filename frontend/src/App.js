@@ -26,11 +26,13 @@ import Notifications from './components/Admin/Notifications';
 
 // ----- Common Components -----
 import NotificationsDisplay from './components/Common/NotificationsDisplay';
+import Header from './components/Common/Header';
 
 function App() {
   return (
     <BrowserRouter>
       {/* Display notifications for all users */}
+      <Header/>
       <NotificationsDisplay />
       <Routes>
         {/* Auth Routes */}

@@ -9,7 +9,7 @@ function ScheduleStream() {
   const [tags, setTags] = useState('');
   const [schedule, setSchedule] = useState('');
   const token = localStorage.getItem('token');
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const handleSchedule = async (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ function ScheduleStream() {
         { headers: { 'Authorization': `Bearer ${token}` } }
       );
       alert('Stream scheduled successfully!');
-      history.push(`/stream/${response.data.stream_id}`);
+      navigate(`/stream/${response.data.stream_id}`);
     } catch (error) {
       alert('Error scheduling stream');
     }

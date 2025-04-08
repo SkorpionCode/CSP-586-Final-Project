@@ -16,6 +16,9 @@ function Login() {
       localStorage.setItem('role', response.data.role);
       if (response.data.user_id) {
         localStorage.setItem('user_id', response.data.user_id);
+        localStorage.setItem('username', response.data.username);
+        localStorage.setItem('email', response.data.email)
+        localStorage.setItem('role', response.data.role)
       }
       navigate('/');
     } catch (error) {

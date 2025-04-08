@@ -1,11 +1,12 @@
 # app.py
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from flask_cors import CORS
 from flask_socketio import SocketIO, join_room, leave_room, emit
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from models import db, User, Stream, Follow, Report, ChatMessage, Notification
+import os
 
 # Initialize SocketIO with CORS allowed origins for development
 socketio = SocketIO(cors_allowed_origins="*")
@@ -17,16 +18,35 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = 'super-secret-key'  # Change this in production!
 
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": "*"}})
 
     # Initialize extensions
     db.init_app(app)
-    JWTManager(app)
+    jwt = JWTManager(app)
     socketio.init_app(app)
 
     # Create database tables if they don't exist
     with app.app_context():
         db.create_all()
+
+    @jwt.unauthorized_loader
+    def unauthorized_response(callback):
+        return jsonify({'msg': 'Missing or invalid authorization header'}), 422
+
+    @jwt.invalid_token_loader
+    def invalid_token_response(callback):
+        return jsonify({'msg': 'Invalid token'}), 422
+
+    @jwt.expired_token_loader
+    def expired_token_callback(jwt_header, jwt_payload):
+        return jsonify({'msg': 'Token has expired'}), 422
+    
+    # --- Serve HLS files from the /hls folder ---
+    @app.route('/live/<path:filename>')
+    def live_stream(filename):
+        # Adjust the folder path if needed
+        hls_folder = os.path.join(os.getcwd(), 'hls')
+        return send_from_directory(hls_folder, filename)
 
     # ---------------------
     # Authentication Endpoints
@@ -56,10 +76,9 @@ def create_app():
         if user.suspended:
             return jsonify({'msg': 'Account suspended'}), 403
         access_token = create_access_token(identity=user.id)
-        return jsonify({'access_token': access_token, 'role': user.role, 'user_id': user.id}), 200
+        return jsonify({'access_token': access_token, 'role': user.role, 'user_id': user.id, 'username': user.username, 'email': user.email}), 200
 
     @app.route('/logout', methods=['POST'])
-    @jwt_required()
     def logout():
         return jsonify({'msg': 'Logged out successfully'}), 200
 
@@ -92,7 +111,8 @@ def create_app():
             'category': stream.category,
             'tags': stream.tags,
             'is_live': stream.is_live,
-            'channel_info': stream.channel_info
+            'channel_info': stream.channel_info,
+            'stream_url': stream.stream_url  # Added stream_url field
         }
         return jsonify(result), 200
 
@@ -120,16 +140,29 @@ def create_app():
         return jsonify({'msg': 'Report submitted'}), 200
 
     @app.route('/profile', methods=['GET', 'PUT'])
-    @jwt_required()
     def customize_profile():
-        user_id = get_jwt_identity()
-        user = User.query.get_or_404(user_id)
+        data = request.get_json()
+        username = data.get('username')
+        user = User.query.filter_by(username=username).first()
+        user_id = user.user_id
+        # if request.method == 'PUT':
+        #     user.profile_picture = data.get('profile_picture', user.profile_picture)
+        #     user.bio = data.get('bio', user.bio)
+        #     db.session.commit()
+        #     return jsonify({'msg': 'Profile updated'}), 200
         if request.method == 'PUT':
-            data = request.get_json()
-            user.profile_picture = data.get('profile_picture', user.profile_picture)
-            user.bio = data.get('bio', user.bio)
-            db.session.commit()
-            return jsonify({'msg': 'Profile updated'}), 200
+            try:
+                # Forcing JSON parsing can help if Content-Type is not set correctly.
+                data = request.get_json(force=True)
+                # Log the received data (optional, remove in production)
+                app.logger.info("Updating profile for user %s: %s", user_id, data)
+                user.profile_picture = data.get('profile_picture', user.profile_picture)
+                user.bio = data.get('bio', user.bio)
+                db.session.commit()
+                return jsonify({'msg': 'Profile updated'}), 200
+            except Exception as e:
+                app.logger.error("Error updating profile for user %s: %s", user_id, str(e))
+                return jsonify({'msg': 'Error updating profile', 'error': str(e)}), 500
         else:
             result = {
                 'username': user.username,
@@ -141,28 +174,28 @@ def create_app():
             return jsonify(result), 200
 
     @app.route('/become-streamer', methods=['POST'])
-    @jwt_required()
     def become_streamer():
-        user_id = get_jwt_identity()
-        user = User.query.get_or_404(user_id)
+        data = request.get_json()
+        username = data.get('username')
+        user = User.query.filter_by(username=username).first()
         user.role = 'streamer'
         db.session.commit()
         return jsonify({'msg': 'You are now a streamer'}), 200
 
     @app.route('/chat/<int:stream_id>', methods=['GET', 'POST'])
-    @jwt_required()
     def chat_in_stream(stream_id):
         if request.method == 'POST':
             data = request.get_json()
             message_text = data.get('message')
-            user_id = get_jwt_identity()
-            chat_message = ChatMessage(stream_id=stream_id, user_id=user_id, message=message_text)
+            username = data.get('username')
+            user = User.query.filter_by(username=username).first()
+            chat_message = ChatMessage(stream_id=stream_id, user_id=user.id, message=message_text)
             db.session.add(chat_message)
             db.session.commit()
             # Broadcast chat message to clients in the room
             socketio.emit('chat', {
                 'stream_id': stream_id,
-                'user_id': user_id,
+                'user_id': user.id,
                 'message': message_text,
                 'timestamp': chat_message.timestamp.isoformat()
             }, room=f'stream_{stream_id}')
@@ -181,46 +214,53 @@ def create_app():
     # Streamer Endpoints
     # ---------------------
     @app.route('/stream/setup', methods=['POST'])
-    @jwt_required()
     def stream_setup():
-        user_id = get_jwt_identity()
-        user = User.query.get(user_id)
+        data = request.get_json()
+        username = data.get('username')
+        user = User.query.filter_by(username=username).first()
+        user_id = user.id
         if user.role not in ['streamer', 'admin']:
             return jsonify({'msg': 'Unauthorized action'}), 403
-        data = request.get_json()
         title = data.get('title')
         category = data.get('category')
         tags = data.get('tags')
-        schedule = data.get('schedule')  # expects ISO format string
+        schedule = data.get('schedule')  # ISO string expected
         channel_info = data.get('channel_info')
+        stream_url = data.get('stream_url')  # Optional, user can pre-configure
         new_stream = Stream(
             title=title,
             category=category,
             tags=tags,
             schedule=datetime.fromisoformat(schedule) if schedule else None,
             streamer_id=user_id,
-            channel_info=channel_info
+            channel_info=channel_info,
+            stream_url=stream_url
         )
         db.session.add(new_stream)
         db.session.commit()
         return jsonify({'msg': 'Stream setup completed', 'stream_id': new_stream.id}), 201
 
     @app.route('/stream/go-live/<int:stream_id>', methods=['POST'])
-    @jwt_required()
     def go_live(stream_id):
-        user_id = get_jwt_identity()
+        data = request.get_json()
+        username = data.get('username')
+        user = User.query.filter_by(username=username).first()
+        user_id = user.id
         stream = Stream.query.get_or_404(stream_id)
         if stream.streamer_id != user_id:
             return jsonify({'msg': 'Unauthorized action'}), 403
         stream.is_live = True
+        hls_url = f"http://localhost/hls/stream_{stream_id}.m3u8"
+        stream.stream_url = hls_url
         db.session.commit()
-        return jsonify({'msg': 'Stream is now live'}), 200
-
+        return jsonify({'msg': 'Stream is now live', 'stream_url': stream.stream_url}), 200
+    
     @app.route('/channel/customize', methods=['PUT'])
-    @jwt_required()
     def customize_channel():
-        user_id = get_jwt_identity()
         data = request.get_json()
+        username = data.get('username')
+        user = User.query.filter_by(username=username).first()
+        user_id = user.user_id
         stream_id = data.get('stream_id')
         stream = Stream.query.filter_by(id=stream_id, streamer_id=user_id).first()
         if not stream:
@@ -232,11 +272,12 @@ def create_app():
     @app.route('/stream/schedule', methods=['POST'])
     @jwt_required()
     def schedule_stream():
-        user_id = get_jwt_identity()
-        user = User.query.get(user_id)
+        data = request.get_json()
+        username = data.get('username')
+        user = User.query.filter_by(username=username).first()
+        user_id = user.user_id
         if user.role not in ['streamer', 'admin']:
             return jsonify({'msg': 'Unauthorized action'}), 403
-        data = request.get_json()
         title = data.get('title')
         category = data.get('category')
         tags = data.get('tags')

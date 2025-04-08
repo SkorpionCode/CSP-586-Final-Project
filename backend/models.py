@@ -28,11 +28,12 @@ class Stream(db.Model):
     streamer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     channel_info = db.Column(db.Text)
+    stream_url = db.Column(db.String(300)) 
 
 class Follow(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     viewer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    streamer_id = db.Column(db.Integer, nullable=False)  # Optionally, set as ForeignKey('user.id')
+    streamer_id = db.Column(db.Integer, nullable=False)
 
 class Report(db.Model):
     id = db.Column(db.Integer, primary_key=True)
