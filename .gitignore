@@ -1,0 +1,7 @@
+
+/backend/__pycache__
+/backend/migrations/__pycache__
+/backend/migrations
+/backend/venv
+/frontend/node_modules
+/backend/nginx 1.7.11.3 Gryphon/hls

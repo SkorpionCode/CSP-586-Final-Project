@@ -1,0 +1,366 @@
+2025/04/08 14:54:17 [emerg] 27352#31004: no "events" section in configuration
+2025/04/08 14:55:00 [emerg] 32960#46980: unknown directive "rtmp" in C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/conf/nginx.conf:1
+2025/04/08 14:55:05 [emerg] 43468#47332: no "events" section in configuration
+2025/04/08 14:55:08 [emerg] 41500#42776: no "events" section in configuration
+2025/04/08 14:55:16 [emerg] 47536#10108: no "events" section in configuration
+2025/04/08 14:55:21 [emerg] 47116#44736: no "events" section in configuration
+2025/04/08 14:55:30 [emerg] 29156#34812: no "events" section in configuration
+2025/04/08 15:03:32 [emerg] 10924#48104: no "events" section in configuration
+2025/04/08 15:04:23 [emerg] 30328#35176: CreateDirectory() "/var/www/hls" failed (3: The system cannot find the path specified)
+2025/04/08 15:04:46 [notice] 31668#37712: sockinit() attempting to access sockapi
+2025/04/08 15:04:46 [notice] 31668#37712: Access to sockapi succeded!
+2025/04/08 15:04:46 [notice] 31668#37712: using sockapi from "4;124;"
+2025/04/08 15:04:46 [notice] 37520#40064: sockinit() attempting to access sockapi
+2025/04/08 15:04:46 [notice] 37520#40064: Access to sockapi succeded!
+2025/04/08 15:04:46 [notice] 37520#40064: using sockapi from "4;8;"
+2025/04/08 15:04:46 [notice] 22764#17008: sockinit() attempting to access sockapi
+2025/04/08 15:04:46 [notice] 22764#17008: Access to sockapi succeded!
+2025/04/08 15:04:46 [notice] 22764#17008: using sockapi from "4;8;"
+2025/04/08 15:04:46 [notice] 42412#40828: sockinit() attempting to access sockapi
+2025/04/08 15:04:46 [notice] 42412#40828: Access to sockapi succeded!
+2025/04/08 15:04:46 [notice] 42412#40828: using sockapi from "4;8;"
+2025/04/08 15:04:46 [notice] 4728#28240: sockinit() attempting to access sockapi
+2025/04/08 15:04:46 [notice] 4728#28240: Access to sockapi succeded!
+2025/04/08 15:04:46 [notice] 4728#28240: using sockapi from "4;8;"
+2025/04/08 15:04:47 [notice] 36288#42132: sockinit() attempting to access sockapi
+2025/04/08 15:04:47 [notice] 36288#42132: Access to sockapi succeded!
+2025/04/08 15:04:47 [notice] 36288#42132: using sockapi from "4;8;"
+2025/04/08 15:04:47 [notice] 44876#42244: sockinit() attempting to access sockapi
+2025/04/08 15:04:47 [notice] 44876#42244: Access to sockapi succeded!
+2025/04/08 15:04:47 [notice] 44876#42244: using sockapi from "4;8;"
+2025/04/08 15:04:47 [notice] 36072#43748: sockinit() attempting to access sockapi
+2025/04/08 15:04:47 [notice] 36072#43748: Access to sockapi succeded!
+2025/04/08 15:04:47 [notice] 36072#43748: using sockapi from "4;8;"
+2025/04/08 15:04:47 [notice] 6156#44716: sockinit() attempting to access sockapi
+2025/04/08 15:04:47 [notice] 6156#44716: Access to sockapi succeded!
+2025/04/08 15:04:47 [notice] 6156#44716: using sockapi from "4;8;"
+2025/04/08 15:04:47 [notice] 13448#22052: sockinit() attempting to access sockapi
+2025/04/08 15:04:47 [notice] 13448#22052: Access to sockapi succeded!
+2025/04/08 15:04:47 [notice] 13448#22052: using sockapi from "4;8;"
+2025/04/08 15:04:48 [notice] 28008#26588: sockinit() attempting to access sockapi
+2025/04/08 15:04:48 [notice] 28008#26588: Access to sockapi succeded!
+2025/04/08 15:04:48 [notice] 28008#26588: using sockapi from "4;8;"
+2025/04/08 15:04:48 [notice] 41620#42288: sockinit() attempting to access sockapi
+2025/04/08 15:04:48 [notice] 41620#42288: Access to sockapi succeded!
+2025/04/08 15:04:48 [notice] 41620#42288: using sockapi from "4;8;"
+2025/04/08 15:04:48 [notice] 37760#6308: sockinit() attempting to access sockapi
+2025/04/08 15:04:48 [notice] 37760#6308: Access to sockapi succeded!
+2025/04/08 15:04:48 [notice] 37760#6308: using sockapi from "4;8;"
+2025/04/08 15:04:48 [notice] 41116#33740: sockinit() attempting to access sockapi
+2025/04/08 15:04:48 [notice] 41116#33740: Access to sockapi succeded!
+2025/04/08 15:04:48 [notice] 41116#33740: using sockapi from "4;8;"
+2025/04/08 15:04:48 [notice] 41600#36168: sockinit() attempting to access sockapi
+2025/04/08 15:04:48 [notice] 41600#36168: Access to sockapi succeded!
+2025/04/08 15:04:48 [notice] 41600#36168: using sockapi from "4;8;"
+2025/04/08 15:04:49 [notice] 35900#41164: sockinit() attempting to access sockapi
+2025/04/08 15:04:49 [notice] 35900#41164: Access to sockapi succeded!
+2025/04/08 15:04:49 [notice] 35900#41164: using sockapi from "4;8;"
+2025/04/08 15:11:16 [error] 31668#44960: *3 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/../backend/hls/stream_2.m3u8" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost"
+2025/04/08 15:11:17 [error] 31668#44960: *3 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/hls/stream_2.m3u8"
+2025/04/08 15:19:52 [notice] 15652#23020: signal process started (reload)
+2025/04/08 15:21:00 [notice] 23968#26444: signal process started (stop)
+2025/04/08 15:21:00 [error] 23968#26444: OpenEvent("Global\ngx_stop_37452") failed (2: The system cannot find the file specified)
+2025/04/08 15:22:36 [error] 31668#44960: *8 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/../backend/hls/stream_2.m3u8" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost"
+2025/04/08 15:22:59 [error] 31668#44960: *8 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/../backend/hls" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /hls HTTP/1.1", host: "localhost"
+2025/04/08 15:23:15 [error] 31668#44960: *8 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/../backend/hls/stream_2.m3u8" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost"
+2025/04/08 15:24:15 [notice] 35004#28512: sockinit() attempting to access sockapi
+2025/04/08 15:24:15 [notice] 35004#28512: Access to sockapi succeded!
+2025/04/08 15:24:15 [notice] 35004#28512: using sockapi from "4;96;"
+2025/04/08 15:24:15 [notice] 28532#38692: sockinit() attempting to access sockapi
+2025/04/08 15:24:15 [notice] 28532#38692: Access to sockapi succeded!
+2025/04/08 15:24:15 [notice] 28532#38692: using sockapi from "4;8;"
+2025/04/08 15:24:16 [notice] 42636#27500: sockinit() attempting to access sockapi
+2025/04/08 15:24:16 [notice] 42636#27500: Access to sockapi succeded!
+2025/04/08 15:24:16 [notice] 42636#27500: using sockapi from "4;8;"
+2025/04/08 15:24:16 [notice] 41404#30296: sockinit() attempting to access sockapi
+2025/04/08 15:24:16 [notice] 41404#30296: Access to sockapi succeded!
+2025/04/08 15:24:16 [notice] 41404#30296: using sockapi from "4;8;"
+2025/04/08 15:24:16 [notice] 26940#44188: sockinit() attempting to access sockapi
+2025/04/08 15:24:16 [notice] 26940#44188: Access to sockapi succeded!
+2025/04/08 15:24:16 [notice] 26940#44188: using sockapi from "4;8;"
+2025/04/08 15:24:16 [notice] 44584#44768: sockinit() attempting to access sockapi
+2025/04/08 15:24:16 [notice] 44584#44768: Access to sockapi succeded!
+2025/04/08 15:24:16 [notice] 44584#44768: using sockapi from "4;8;"
+2025/04/08 15:24:16 [notice] 18288#30344: sockinit() attempting to access sockapi
+2025/04/08 15:24:16 [notice] 18288#30344: Access to sockapi succeded!
+2025/04/08 15:24:16 [notice] 18288#30344: using sockapi from "4;8;"
+2025/04/08 15:24:17 [notice] 45880#40164: sockinit() attempting to access sockapi
+2025/04/08 15:24:17 [notice] 45880#40164: Access to sockapi succeded!
+2025/04/08 15:24:17 [notice] 45880#40164: using sockapi from "4;8;"
+2025/04/08 15:24:17 [notice] 46768#18704: sockinit() attempting to access sockapi
+2025/04/08 15:24:17 [notice] 46768#18704: Access to sockapi succeded!
+2025/04/08 15:24:17 [notice] 46768#18704: using sockapi from "4;8;"
+2025/04/08 15:24:17 [notice] 33484#5128: sockinit() attempting to access sockapi
+2025/04/08 15:24:17 [notice] 33484#5128: Access to sockapi succeded!
+2025/04/08 15:24:17 [notice] 33484#5128: using sockapi from "4;8;"
+2025/04/08 15:24:17 [notice] 22652#18852: sockinit() attempting to access sockapi
+2025/04/08 15:24:17 [notice] 22652#18852: Access to sockapi succeded!
+2025/04/08 15:24:17 [notice] 22652#18852: using sockapi from "4;8;"
+2025/04/08 15:24:17 [notice] 22948#33632: sockinit() attempting to access sockapi
+2025/04/08 15:24:17 [notice] 22948#33632: Access to sockapi succeded!
+2025/04/08 15:24:17 [notice] 22948#33632: using sockapi from "4;8;"
+2025/04/08 15:24:18 [notice] 9376#29896: sockinit() attempting to access sockapi
+2025/04/08 15:24:18 [notice] 9376#29896: Access to sockapi succeded!
+2025/04/08 15:24:18 [notice] 9376#29896: using sockapi from "4;8;"
+2025/04/08 15:24:18 [notice] 1816#41348: sockinit() attempting to access sockapi
+2025/04/08 15:24:18 [notice] 1816#41348: Access to sockapi succeded!
+2025/04/08 15:24:18 [notice] 1816#41348: using sockapi from "4;8;"
+2025/04/08 15:24:18 [notice] 43504#47884: sockinit() attempting to access sockapi
+2025/04/08 15:24:18 [notice] 43504#47884: Access to sockapi succeded!
+2025/04/08 15:24:18 [notice] 43504#47884: using sockapi from "4;8;"
+2025/04/08 15:24:18 [notice] 24188#46204: sockinit() attempting to access sockapi
+2025/04/08 15:24:18 [notice] 24188#46204: Access to sockapi succeded!
+2025/04/08 15:24:18 [notice] 24188#46204: using sockapi from "4;8;"
+2025/04/08 15:26:45 [notice] 12804#45976: sockinit() attempting to access sockapi
+2025/04/08 15:26:45 [notice] 12804#45976: Access to sockapi succeded!
+2025/04/08 15:26:45 [notice] 12804#45976: using sockapi from "4;80;"
+2025/04/08 15:26:45 [notice] 43120#41844: sockinit() attempting to access sockapi
+2025/04/08 15:26:45 [notice] 43120#41844: Access to sockapi succeded!
+2025/04/08 15:26:45 [notice] 43120#41844: using sockapi from "4;8;"
+2025/04/08 15:26:45 [notice] 43488#45244: sockinit() attempting to access sockapi
+2025/04/08 15:26:45 [notice] 43488#45244: Access to sockapi succeded!
+2025/04/08 15:26:45 [notice] 43488#45244: using sockapi from "4;8;"
+2025/04/08 15:26:45 [notice] 42732#28012: sockinit() attempting to access sockapi
+2025/04/08 15:26:45 [notice] 42732#28012: Access to sockapi succeded!
+2025/04/08 15:26:45 [notice] 42732#28012: using sockapi from "4;8;"
+2025/04/08 15:26:46 [notice] 40236#9360: sockinit() attempting to access sockapi
+2025/04/08 15:26:46 [notice] 40236#9360: Access to sockapi succeded!
+2025/04/08 15:26:46 [notice] 40236#9360: using sockapi from "4;8;"
+2025/04/08 15:26:46 [notice] 47780#28120: sockinit() attempting to access sockapi
+2025/04/08 15:26:46 [notice] 47780#28120: Access to sockapi succeded!
+2025/04/08 15:26:46 [notice] 47780#28120: using sockapi from "4;8;"
+2025/04/08 15:26:46 [notice] 33316#25712: sockinit() attempting to access sockapi
+2025/04/08 15:26:46 [notice] 33316#25712: Access to sockapi succeded!
+2025/04/08 15:26:46 [notice] 33316#25712: using sockapi from "4;8;"
+2025/04/08 15:26:46 [notice] 36428#23152: sockinit() attempting to access sockapi
+2025/04/08 15:26:46 [notice] 36428#23152: Access to sockapi succeded!
+2025/04/08 15:26:46 [notice] 36428#23152: using sockapi from "4;8;"
+2025/04/08 15:26:46 [notice] 34996#42708: sockinit() attempting to access sockapi
+2025/04/08 15:26:46 [notice] 34996#42708: Access to sockapi succeded!
+2025/04/08 15:26:46 [notice] 34996#42708: using sockapi from "4;8;"
+2025/04/08 15:26:47 [notice] 34260#37496: sockinit() attempting to access sockapi
+2025/04/08 15:26:47 [notice] 34260#37496: Access to sockapi succeded!
+2025/04/08 15:26:47 [notice] 34260#37496: using sockapi from "4;8;"
+2025/04/08 15:26:47 [notice] 23004#39792: sockinit() attempting to access sockapi
+2025/04/08 15:26:47 [notice] 23004#39792: Access to sockapi succeded!
+2025/04/08 15:26:47 [notice] 23004#39792: using sockapi from "4;8;"
+2025/04/08 15:26:47 [notice] 32452#43092: sockinit() attempting to access sockapi
+2025/04/08 15:26:47 [notice] 32452#43092: Access to sockapi succeded!
+2025/04/08 15:26:47 [notice] 32452#43092: using sockapi from "4;8;"
+2025/04/08 15:26:47 [notice] 48112#45812: sockinit() attempting to access sockapi
+2025/04/08 15:26:47 [notice] 48112#45812: Access to sockapi succeded!
+2025/04/08 15:26:47 [notice] 48112#45812: using sockapi from "4;8;"
+2025/04/08 15:26:48 [notice] 34404#47288: sockinit() attempting to access sockapi
+2025/04/08 15:26:48 [notice] 34404#47288: Access to sockapi succeded!
+2025/04/08 15:26:48 [notice] 34404#47288: using sockapi from "4;8;"
+2025/04/08 15:26:48 [notice] 38940#13528: sockinit() attempting to access sockapi
+2025/04/08 15:26:48 [notice] 38940#13528: Access to sockapi succeded!
+2025/04/08 15:26:48 [notice] 38940#13528: using sockapi from "4;8;"
+2025/04/08 15:26:48 [notice] 39672#23252: sockinit() attempting to access sockapi
+2025/04/08 15:26:48 [notice] 39672#23252: Access to sockapi succeded!
+2025/04/08 15:26:48 [notice] 39672#23252: using sockapi from "4;8;"
+2025/04/08 15:46:00 [error] 43120#44468: *13 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost"
+2025/04/08 15:46:02 [error] 43120#44468: *13 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost"
+2025/04/08 15:46:05 [error] 43120#44468: *13 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost"
+2025/04/08 15:56:59 [error] 34260#40408: *16 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 15:56:59 [error] 34260#40408: *16 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 15:56:59 [error] 34260#40408: *16 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:00:07 [notice] 42048#30296: signal process started (reload)
+2025/04/08 16:00:07 [error] 42048#30296: OpenEvent("Global\ngx_reload_37000") failed (2: The system cannot find the file specified)
+2025/04/08 16:00:11 [notice] 39860#14396: sockinit() attempting to access sockapi
+2025/04/08 16:00:11 [notice] 39860#14396: Access to sockapi succeded!
+2025/04/08 16:00:11 [notice] 39860#14396: using sockapi from "4;140;"
+2025/04/08 16:00:12 [notice] 42304#44944: sockinit() attempting to access sockapi
+2025/04/08 16:00:12 [notice] 42304#44944: Access to sockapi succeded!
+2025/04/08 16:00:12 [notice] 42304#44944: using sockapi from "4;8;"
+2025/04/08 16:00:12 [notice] 44040#41408: sockinit() attempting to access sockapi
+2025/04/08 16:00:12 [notice] 44040#41408: Access to sockapi succeded!
+2025/04/08 16:00:12 [notice] 44040#41408: using sockapi from "4;8;"
+2025/04/08 16:00:12 [notice] 7688#31032: sockinit() attempting to access sockapi
+2025/04/08 16:00:12 [notice] 7688#31032: Access to sockapi succeded!
+2025/04/08 16:00:12 [notice] 7688#31032: using sockapi from "4;8;"
+2025/04/08 16:00:12 [notice] 39480#39372: sockinit() attempting to access sockapi
+2025/04/08 16:00:12 [notice] 39480#39372: Access to sockapi succeded!
+2025/04/08 16:00:12 [notice] 39480#39372: using sockapi from "4;8;"
+2025/04/08 16:00:12 [notice] 45888#2668: sockinit() attempting to access sockapi
+2025/04/08 16:00:12 [notice] 45888#2668: Access to sockapi succeded!
+2025/04/08 16:00:12 [notice] 45888#2668: using sockapi from "4;8;"
+2025/04/08 16:00:13 [notice] 43944#20372: sockinit() attempting to access sockapi
+2025/04/08 16:00:13 [notice] 43944#20372: Access to sockapi succeded!
+2025/04/08 16:00:13 [notice] 43944#20372: using sockapi from "4;8;"
+2025/04/08 16:00:13 [notice] 34856#41904: sockinit() attempting to access sockapi
+2025/04/08 16:00:13 [notice] 34856#41904: Access to sockapi succeded!
+2025/04/08 16:00:13 [notice] 34856#41904: using sockapi from "4;8;"
+2025/04/08 16:00:13 [notice] 16368#38036: sockinit() attempting to access sockapi
+2025/04/08 16:00:13 [notice] 16368#38036: Access to sockapi succeded!
+2025/04/08 16:00:13 [notice] 16368#38036: using sockapi from "4;8;"
+2025/04/08 16:00:13 [notice] 28376#42140: sockinit() attempting to access sockapi
+2025/04/08 16:00:13 [notice] 28376#42140: Access to sockapi succeded!
+2025/04/08 16:00:13 [notice] 28376#42140: using sockapi from "4;8;"
+2025/04/08 16:00:14 [notice] 39548#39004: sockinit() attempting to access sockapi
+2025/04/08 16:00:14 [notice] 39548#39004: Access to sockapi succeded!
+2025/04/08 16:00:14 [notice] 39548#39004: using sockapi from "4;8;"
+2025/04/08 16:00:14 [notice] 44500#14640: sockinit() attempting to access sockapi
+2025/04/08 16:00:14 [notice] 44500#14640: Access to sockapi succeded!
+2025/04/08 16:00:14 [notice] 44500#14640: using sockapi from "4;8;"
+2025/04/08 16:00:14 [notice] 34988#33668: sockinit() attempting to access sockapi
+2025/04/08 16:00:14 [notice] 34988#33668: Access to sockapi succeded!
+2025/04/08 16:00:14 [notice] 34988#33668: using sockapi from "4;8;"
+2025/04/08 16:00:14 [notice] 13468#33524: sockinit() attempting to access sockapi
+2025/04/08 16:00:14 [notice] 13468#33524: Access to sockapi succeded!
+2025/04/08 16:00:14 [notice] 13468#33524: using sockapi from "4;8;"
+2025/04/08 16:00:15 [notice] 4264#4728: sockinit() attempting to access sockapi
+2025/04/08 16:00:15 [notice] 4264#4728: Access to sockapi succeded!
+2025/04/08 16:00:15 [notice] 4264#4728: using sockapi from "4;8;"
+2025/04/08 16:00:15 [notice] 38936#11448: sockinit() attempting to access sockapi
+2025/04/08 16:00:15 [notice] 38936#11448: Access to sockapi succeded!
+2025/04/08 16:00:15 [notice] 38936#11448: using sockapi from "4;8;"
+2025/04/08 16:12:34 [error] 39548#31904: *13 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:25:37 [error] 44040#33264: *20 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-63.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-63.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:25:37 [error] 44040#33264: *20 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-64.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-64.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:25:38 [error] 44040#33264: *20 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:25:38 [error] 44040#33264: *20 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:25:39 [error] 44040#33264: *20 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:25:39 [error] 44040#33264: *20 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:25:41 [error] 44040#33264: *20 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:25:41 [error] 44040#33264: *20 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:32:30 [error] 39860#46344: *24 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_1.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_1.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:32:30 [error] 39860#46344: *24 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_1.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_1.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:33:32 [error] 39860#46344: *24 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:33:33 [error] 39860#46344: *24 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:33:35 [error] 39860#46344: *24 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_1.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_1.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:33:35 [error] 39860#46344: *24 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_1.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_1.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:33:39 [error] 39860#46344: *24 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:41:16 [error] 39860#46344: *27 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:41:16 [error] 39860#46344: *27 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:42:04 [error] 39860#46344: *27 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:42:04 [error] 39860#46344: *27 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:42:11 [error] 39860#46344: *27 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:42:11 [error] 39860#46344: *27 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:42:37 [error] 39860#46344: *27 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:42:37 [error] 39860#46344: *27 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:51:06 [error] 43944#42236: *30 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 16:51:06 [error] 43944#42236: *30 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:09:38 [error] 39548#31904: *33 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:09:38 [error] 39548#31904: *33 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:09:46 [error] 39548#31904: *33 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:09:47 [error] 39548#31904: *33 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:16:54 [error] 39548#31904: *36 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:16:54 [error] 39548#31904: *36 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:17:03 [error] 39548#31904: *36 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:17:04 [error] 39548#31904: *36 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:20:20 [error] 45888#38656: *39 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:20:20 [error] 45888#38656: *39 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2.m3u8 HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:18 [error] 45888#38656: *51 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-0.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-0.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:18 [error] 45888#38656: *51 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-1.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-1.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:18 [error] 45888#38656: *51 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-2.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-2.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-0.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-0.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-1.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-1.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-2.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-2.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-3.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-3.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-4.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-4.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-5.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-5.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-6.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-6.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-0.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-0.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-2.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-2.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-4.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-4.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 17:52:23 [error] 34988#41096: *52 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/./hls/stream_2-6.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /hls/stream_2-6.ts HTTP/1.1", host: "localhost", referrer: "http://localhost:3000/"
+2025/04/08 18:15:48 [notice] 40924#41492: sockinit() attempting to access sockapi
+2025/04/08 18:15:48 [notice] 40924#41492: Access to sockapi succeded!
+2025/04/08 18:15:48 [notice] 40924#41492: using sockapi from "4;136;"
+2025/04/08 18:15:48 [notice] 31272#36316: sockinit() attempting to access sockapi
+2025/04/08 18:15:48 [notice] 31272#36316: Access to sockapi succeded!
+2025/04/08 18:15:48 [notice] 31272#36316: using sockapi from "4;8;"
+2025/04/08 18:15:49 [notice] 17436#6400: sockinit() attempting to access sockapi
+2025/04/08 18:15:49 [notice] 17436#6400: Access to sockapi succeded!
+2025/04/08 18:15:49 [notice] 17436#6400: using sockapi from "4;8;"
+2025/04/08 18:15:49 [notice] 29816#30300: sockinit() attempting to access sockapi
+2025/04/08 18:15:49 [notice] 29816#30300: Access to sockapi succeded!
+2025/04/08 18:15:49 [notice] 29816#30300: using sockapi from "4;8;"
+2025/04/08 18:15:49 [notice] 18688#46176: sockinit() attempting to access sockapi
+2025/04/08 18:15:49 [notice] 18688#46176: Access to sockapi succeded!
+2025/04/08 18:15:49 [notice] 18688#46176: using sockapi from "4;8;"
+2025/04/08 18:15:50 [notice] 8764#40044: sockinit() attempting to access sockapi
+2025/04/08 18:15:50 [notice] 8764#40044: Access to sockapi succeded!
+2025/04/08 18:15:50 [notice] 8764#40044: using sockapi from "4;8;"
+2025/04/08 18:15:50 [notice] 40036#43612: sockinit() attempting to access sockapi
+2025/04/08 18:15:50 [notice] 40036#43612: Access to sockapi succeded!
+2025/04/08 18:15:50 [notice] 40036#43612: using sockapi from "4;8;"
+2025/04/08 18:15:51 [notice] 36380#35276: sockinit() attempting to access sockapi
+2025/04/08 18:15:51 [notice] 36380#35276: Access to sockapi succeded!
+2025/04/08 18:15:51 [notice] 36380#35276: using sockapi from "4;8;"
+2025/04/08 18:15:51 [notice] 41108#11876: sockinit() attempting to access sockapi
+2025/04/08 18:15:51 [notice] 41108#11876: Access to sockapi succeded!
+2025/04/08 18:15:51 [notice] 41108#11876: using sockapi from "4;8;"
+2025/04/08 18:15:51 [notice] 46464#46444: sockinit() attempting to access sockapi
+2025/04/08 18:15:51 [notice] 46464#46444: Access to sockapi succeded!
+2025/04/08 18:15:51 [notice] 46464#46444: using sockapi from "4;8;"
+2025/04/08 18:15:52 [notice] 38892#44072: sockinit() attempting to access sockapi
+2025/04/08 18:15:52 [notice] 38892#44072: Access to sockapi succeded!
+2025/04/08 18:15:52 [notice] 38892#44072: using sockapi from "4;8;"
+2025/04/08 18:15:52 [notice] 36440#46236: sockinit() attempting to access sockapi
+2025/04/08 18:15:52 [notice] 36440#46236: Access to sockapi succeded!
+2025/04/08 18:15:52 [notice] 36440#46236: using sockapi from "4;8;"
+2025/04/08 18:15:53 [notice] 42100#36752: sockinit() attempting to access sockapi
+2025/04/08 18:15:53 [notice] 42100#36752: Access to sockapi succeded!
+2025/04/08 18:15:53 [notice] 42100#36752: using sockapi from "4;8;"
+2025/04/08 18:15:53 [notice] 24228#23116: sockinit() attempting to access sockapi
+2025/04/08 18:15:53 [notice] 24228#23116: Access to sockapi succeded!
+2025/04/08 18:15:53 [notice] 24228#23116: using sockapi from "4;8;"
+2025/04/08 18:15:54 [notice] 28344#31352: sockinit() attempting to access sockapi
+2025/04/08 18:15:54 [notice] 28344#31352: Access to sockapi succeded!
+2025/04/08 18:15:54 [notice] 28344#31352: using sockapi from "4;8;"
+2025/04/08 18:15:54 [notice] 39724#1888: sockinit() attempting to access sockapi
+2025/04/08 18:15:54 [notice] 39724#1888: Access to sockapi succeded!
+2025/04/08 18:15:54 [notice] 39724#1888: using sockapi from "4;8;"
+2025/04/08 18:18:21 [notice] 3508#28972: sockinit() attempting to access sockapi
+2025/04/08 18:18:21 [notice] 3508#28972: Access to sockapi succeded!
+2025/04/08 18:18:21 [notice] 3508#28972: using sockapi from "4;92;"
+2025/04/08 18:18:21 [notice] 30556#30464: sockinit() attempting to access sockapi
+2025/04/08 18:18:21 [notice] 30556#30464: Access to sockapi succeded!
+2025/04/08 18:18:21 [notice] 30556#30464: using sockapi from "4;8;"
+2025/04/08 18:18:21 [notice] 27940#44160: sockinit() attempting to access sockapi
+2025/04/08 18:18:21 [notice] 27940#44160: Access to sockapi succeded!
+2025/04/08 18:18:21 [notice] 27940#44160: using sockapi from "4;8;"
+2025/04/08 18:18:22 [notice] 38212#29476: sockinit() attempting to access sockapi
+2025/04/08 18:18:22 [notice] 38212#29476: Access to sockapi succeded!
+2025/04/08 18:18:22 [notice] 38212#29476: using sockapi from "4;8;"
+2025/04/08 18:18:22 [notice] 30572#6672: sockinit() attempting to access sockapi
+2025/04/08 18:18:22 [notice] 30572#6672: Access to sockapi succeded!
+2025/04/08 18:18:22 [notice] 30572#6672: using sockapi from "4;8;"
+2025/04/08 18:18:22 [notice] 26428#33844: sockinit() attempting to access sockapi
+2025/04/08 18:18:22 [notice] 26428#33844: Access to sockapi succeded!
+2025/04/08 18:18:22 [notice] 26428#33844: using sockapi from "4;8;"
+2025/04/08 18:18:23 [notice] 38312#42780: sockinit() attempting to access sockapi
+2025/04/08 18:18:23 [notice] 38312#42780: Access to sockapi succeded!
+2025/04/08 18:18:23 [notice] 38312#42780: using sockapi from "4;8;"
+2025/04/08 18:18:23 [notice] 13516#30016: sockinit() attempting to access sockapi
+2025/04/08 18:18:23 [notice] 13516#30016: Access to sockapi succeded!
+2025/04/08 18:18:23 [notice] 13516#30016: using sockapi from "4;8;"
+2025/04/08 18:18:24 [notice] 35624#37380: sockinit() attempting to access sockapi
+2025/04/08 18:18:24 [notice] 35624#37380: Access to sockapi succeded!
+2025/04/08 18:18:24 [notice] 35624#37380: using sockapi from "4;8;"
+2025/04/08 18:18:24 [notice] 39492#40984: sockinit() attempting to access sockapi
+2025/04/08 18:18:24 [notice] 39492#40984: Access to sockapi succeded!
+2025/04/08 18:18:24 [notice] 39492#40984: using sockapi from "4;8;"
+2025/04/08 18:18:25 [notice] 43500#46288: sockinit() attempting to access sockapi
+2025/04/08 18:18:25 [notice] 43500#46288: Access to sockapi succeded!
+2025/04/08 18:18:25 [notice] 43500#46288: using sockapi from "4;8;"
+2025/04/08 18:18:25 [notice] 38644#41968: sockinit() attempting to access sockapi
+2025/04/08 18:18:25 [notice] 38644#41968: Access to sockapi succeded!
+2025/04/08 18:18:25 [notice] 38644#41968: using sockapi from "4;8;"
+2025/04/08 18:18:25 [notice] 45424#38856: sockinit() attempting to access sockapi
+2025/04/08 18:18:25 [notice] 45424#38856: Access to sockapi succeded!
+2025/04/08 18:18:25 [notice] 45424#38856: using sockapi from "4;8;"
+2025/04/08 18:18:26 [notice] 32300#45244: sockinit() attempting to access sockapi
+2025/04/08 18:18:26 [notice] 32300#45244: Access to sockapi succeded!
+2025/04/08 18:18:26 [notice] 32300#45244: using sockapi from "4;8;"
+2025/04/08 18:18:26 [notice] 45896#45588: sockinit() attempting to access sockapi
+2025/04/08 18:18:26 [notice] 45896#45588: Access to sockapi succeded!
+2025/04/08 18:18:26 [notice] 45896#45588: using sockapi from "4;8;"
+2025/04/08 18:18:26 [notice] 16312#27744: sockinit() attempting to access sockapi
+2025/04/08 18:18:26 [notice] 16312#27744: Access to sockapi succeded!
+2025/04/08 18:18:26 [notice] 16312#27744: using sockapi from "4;8;"
+2025/04/09 10:31:34 [error] 38644#33644: *2 "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/html/HNAP1/index.html" is not found (3: The system cannot find the path specified), client: 10.1.10.95, server: localhost, request: "GET /HNAP1/ HTTP/1.1", host: "10.1.10.95"
+2025/04/09 10:31:37 [error] 43500#11508: *4 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/html/loginMsg.js" failed (2: The system cannot find the file specified), client: 10.1.10.95, server: localhost, request: "GET /loginMsg.js HTTP/1.1", host: "10.1.10.95"
+2025/04/09 10:31:37 [error] 38312#3192: *5 CreateFile() "C:\Users\mirmi\Desktop\CSP-586-Final-Project\backend\nginx 1.7.11.3 Gryphon/html/cgi/get.cgi" failed (3: The system cannot find the path specified), client: 10.1.10.95, server: localhost, request: "GET /cgi/get.cgi?cmd=home_login HTTP/1.1", host: "10.1.10.95"
