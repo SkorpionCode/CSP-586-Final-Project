@@ -1,7 +1,7 @@
 // src/components/Auth/Signup.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Signup() {
   const [username, setUsername] = useState('');
@@ -12,9 +12,16 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/signup', { username, email, password });
+      const response = await axios.post('http://localhost:5000/signup', { username, email, password });
+      localStorage.setItem('role', response.data.role);
+      if (response.data.user_id) {
+        localStorage.setItem('user_id', response.data.user_id);
+        localStorage.setItem('username', response.data.username);
+        localStorage.setItem('email', response.data.email)
+        localStorage.setItem('role', response.data.role)
+      }
       alert('Account created successfully!');
-      navigate('/login');
+      navigate('/browse');
     } catch (error) {
       alert('Signup failed: ' + (error.response?.data?.msg || error));
     }
@@ -55,6 +62,8 @@ function Signup() {
         </label>
         <br />
         <button type="submit">Signup</button>
+        <p>If you have an account already: </p>
+        <Link to={`/login`}>Login</Link>
       </form>
     </div>
   );

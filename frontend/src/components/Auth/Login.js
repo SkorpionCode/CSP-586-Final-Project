@@ -1,7 +1,7 @@
 // src/components/Auth/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -20,7 +20,7 @@ function Login() {
         localStorage.setItem('email', response.data.email)
         localStorage.setItem('role', response.data.role)
       }
-      navigate('/');
+      navigate('/browse');
     } catch (error) {
       alert('Login failed: ' + (error.response?.data?.msg || 'Error'));
     }
@@ -41,6 +41,9 @@ function Login() {
         </label>
         <br />
         <button type="submit">Login</button>
+        <br />
+        <p>If you don't have an acconut: </p>
+        <Link to={`/signup`}>Sign Up</Link>
       </form>
     </div>
   );
