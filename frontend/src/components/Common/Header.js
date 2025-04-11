@@ -1,11 +1,12 @@
 // src/components/Header.js
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('username') || 'Guest';
   const role = localStorage.getItem('role');
@@ -25,6 +26,24 @@ function Header() {
     localStorage.removeItem('user_id');
     localStorage.removeItem('role');
     navigate('/login');
+    window.location.reload();
+  };
+
+  const renderAuthButton = () => {
+    if (location.pathname === '/login') {
+      return (
+        <Button color="inherit" onClick={() => navigate('/signup')}>
+          Sign Up
+        </Button>
+      );
+    } else if (location.pathname === '/signup') {
+      return (
+        <Button color="inherit" onClick={() => navigate('/login')}>
+          Log In
+        </Button>
+      );
+    }
+    return null;
   };
 
   return (
@@ -46,23 +65,21 @@ function Header() {
             </Button>
             {role === 'admin' && (
               <Button color="inherit" onClick={() => navigate('/admin/reports')}>
-              View Reports
-            </Button>
+                View Reports
+              </Button>
             )}
             <Button color="inherit" onClick={() => navigate('/browse')}>
               Browse Streams
             </Button>
             <Button color="inherit" onClick={() => navigate('/report')}>
               Report
-          </Button>
+            </Button>
             <Button color="inherit" onClick={handleLogout}>
               Logout
             </Button>
           </Box>
         ) : (
-          <Button color="inherit" onClick={() => navigate('/login')}>
-            Login
-          </Button>
+          renderAuthButton()
         )}
       </Toolbar>
     </AppBar>

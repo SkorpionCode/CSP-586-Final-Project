@@ -66,7 +66,7 @@ function AdminReports() {
           const streamOwnerResponse = await axios.get(
             `http://localhost:5000/stream-owner-id-by-title?title=${selectedReport.stream_title}`
           );
-          userIdToSuspend = streamOwnerResponse.data.user_id;
+          userIdToSuspend = streamOwnerResponse.data.streamer_id;
           const streamOwnerUsernameResponse = await axios.get(
             `http://localhost:5000/username-by-id?id=${userIdToSuspend}`
           );
