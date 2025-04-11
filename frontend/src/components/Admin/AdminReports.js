@@ -3,6 +3,20 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Notifications from './Notifications';
+import {
+  Container,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+  Box,
+} from '@mui/material';
 
 function AdminReports() {
   const [activeReports, setActiveReports] = useState([]);
@@ -16,7 +30,8 @@ function AdminReports() {
 
   const reloadReports = useCallback(() => {
     if (username) {
-      axios.get(`http://localhost:5000/admin/reports?username=${username}`)
+      axios
+        .get(`http://localhost:5000/admin/reports?username=${username}`)
         .then(response => {
           setActiveReports(response.data.active_reports);
           setInactiveReports(response.data.inactive_reports);
@@ -43,19 +58,27 @@ function AdminReports() {
 
         if (selectedReport.reported_username) {
           usernameToSuspend = selectedReport.reported_username;
-          const reportedUserResponse = await axios.get(`http://localhost:5000/user-id-by-username?username=${selectedReport.reported_username}`);
+          const reportedUserResponse = await axios.get(
+            `http://localhost:5000/user-id-by-username?username=${selectedReport.reported_username}`
+          );
           userIdToSuspend = reportedUserResponse.data.user_id;
         } else if (selectedReport.stream_title) {
-          const streamOwnerResponse = await axios.get(`http://localhost:5000/stream-owner-id-by-title?title=${selectedReport.stream_title}`);
+          const streamOwnerResponse = await axios.get(
+            `http://localhost:5000/stream-owner-id-by-title?title=${selectedReport.stream_title}`
+          );
           userIdToSuspend = streamOwnerResponse.data.user_id;
-          const streamOwnerUsernameResponse = await axios.get(`http://localhost:5000/username-by-id?id=${userIdToSuspend}`);
+          const streamOwnerUsernameResponse = await axios.get(
+            `http://localhost:5000/username-by-id?id=${userIdToSuspend}`
+          );
           usernameToSuspend = streamOwnerUsernameResponse.data.username;
         }
 
         const adminUsername = localStorage.getItem('username');
-        await axios.post(`http://localhost:5000/admin/suspend/${userIdToSuspend}?username=${adminUsername}`, {}, {
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-        });
+        await axios.post(
+          `http://localhost:5000/admin/suspend/${userIdToSuspend}?username=${adminUsername}`,
+          {},
+          { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
+        );
 
         alert(`${usernameToSuspend} was suspended.`);
         await axios.post('http://localhost:5000/handle-report', { report_id: selectedReport.id });
@@ -84,44 +107,82 @@ function AdminReports() {
   };
 
   return (
-    <div>
-      <h2>Active Reports</h2>
-      <ul>
+    <Container maxWidth="md" sx={{ mt: 4 }}>
+      <Typography variant="h4" sx={{ mb: 2, color: '#0D47A1' }}>
+        Active Reports
+      </Typography>
+      <List>
         {activeReports.map(report => (
-          <li key={report.id} onClick={() => handleReportClick(report)}>
-            Reporter: {report.reporter_username}, Reported User: {report.reported_username}, Stream: {report.stream_title}, Description: {report.description}
-          </li>
+          <ListItem button key={report.id} onClick={() => handleReportClick(report)}>
+            <ListItemText
+              primary={`Reporter: ${report.reporter_username}, Reported User: ${report.reported_username}, Stream: ${report.stream_title}`}
+              secondary={`Description: ${report.description}`}
+            />
+          </ListItem>
         ))}
-      </ul>
-      <h2>Inactive Reports</h2>
-      <ul>
+      </List>
+      <Typography variant="h4" sx={{ mt: 4, mb: 2, color: '#0D47A1' }}>
+        Inactive Reports
+      </Typography>
+      <List>
         {inactiveReports.map(report => (
-          <li key={report.id}>
-            Reporter: {report.reporter_username}, Reported User: {report.reported_username}, Stream: {report.stream_title}, Description: {report.description}
-          </li>
+          <ListItem key={report.id}>
+            <ListItemText
+              primary={`Reporter: ${report.reporter_username}, Reported User: ${report.reported_username}, Stream: ${report.stream_title}`}
+              secondary={`Description: ${report.description}`}
+            />
+          </ListItem>
         ))}
-      </ul>
-      {selectedReport && (
-        <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', border: '1px solid black' }}>
-          <p>Report ID: {selectedReport.id}</p>
-          <p>Description: {selectedReport.description}</p>
-          <button onClick={handleSuspendUser}>Suspend User</button>
-          <button onClick={handleDismissReport}>Dismiss Report</button>
-          <button onClick={() => setSelectedReport(null)}>Close</button>
-        </div>
-      )}
-      {showNotifications && (
-        <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', border: '1px solid black' }}>
-          <Notifications
-            reportId={notificationReportId}
-            onClose={() => setShowNotifications(false)}
-            type={notificationType}
-            onNotificationSent={reloadReports}
-          />
-        </div>
-      )}
-      <button onClick={() => navigate('/admin/users')}>Unsuspend User</button>
-    </div>
+      </List>
+      
+      {/* Dialog for Selected Report */}
+      <Dialog open={Boolean(selectedReport)} onClose={() => setSelectedReport(null)}>
+        <DialogTitle>Report Details</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <strong>Report ID:</strong> {selectedReport?.id}<br />
+            <strong>Description:</strong> {selectedReport?.description}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" color="error" onClick={handleSuspendUser}>
+            Suspend User
+          </Button>
+          <Button variant="contained" onClick={handleDismissReport}>
+            Dismiss Report
+          </Button>
+          <Button variant="outlined" onClick={() => setSelectedReport(null)}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+      
+      {/* Dialog for Notifications */}
+      <Dialog open={showNotifications} onClose={() => setShowNotifications(false)}>
+        <DialogTitle>Notification</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <Notifications
+              reportId={notificationReportId}
+              onClose={() => setShowNotifications(false)}
+              type={notificationType}
+              onNotificationSent={reloadReports}
+            />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="outlined" onClick={() => setShowNotifications(false)}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+      
+      <Box sx={{ mt: 4 }}>
+        <Button variant="contained" onClick={() => navigate('/admin/users')}>
+          Unsuspend User
+        </Button>
+      </Box>
+    </Container>
   );
 }
 

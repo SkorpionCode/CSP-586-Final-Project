@@ -195,10 +195,10 @@ def create_app():
         data = request.get_json()
         username = data.get('username')
         user = User.query.filter_by(username=username).first()
-        user_id = user.user_id
+        user_id = user.id
         if request.method == 'PUT':
             try:
-                data = request.get_json(force=True)
+                #data = request.get_json(force=True)
                 user.profile_picture = data.get('profile_picture', user.profile_picture)
                 user.bio = data.get('bio', user.bio)
                 db.session.commit()
@@ -330,7 +330,7 @@ def create_app():
         data = request.get_json()
         username = data.get('username')
         user = User.query.filter_by(username=username).first()
-        user_id = user.user_id
+        user_id = user.id
         stream_id = data.get('stream_id')
         stream = Stream.query.filter_by(id=stream_id, streamer_id=user_id).first()
         if not stream:
@@ -340,12 +340,11 @@ def create_app():
         return jsonify({'msg': 'Channel page customized'}), 200
 
     @app.route('/stream/schedule', methods=['POST'])
-    @jwt_required()
     def schedule_stream():
         data = request.get_json()
         username = data.get('username')
         user = User.query.filter_by(username=username).first()
-        user_id = user.user_id
+        user_id = user.id
         if user.role not in ['streamer', 'admin']:
             return jsonify({'msg': 'Unauthorized action'}), 403
         title = data.get('title')

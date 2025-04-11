@@ -12,7 +12,7 @@ function Notifications({ reportId, onClose, type, onNotificationSent }) {
     try {
       await axios.post(
         `http://localhost:5000/admin/notifications?username=${adminUsername}`,
-        { message, reportId , type },
+        { message, reportId , type, adminUsername },
         {
           headers: { Authorization: `Bearer ${token}` },
         }

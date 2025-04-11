@@ -1,6 +1,7 @@
 // src/components/Admin/BecomeAdmin.js
 import React from 'react';
 import axios from 'axios';
+import { Container, Box, Typography, Button } from '@mui/material';
 
 function BecomeAdmin() {
   const token = localStorage.getItem('token');
@@ -20,10 +21,35 @@ function BecomeAdmin() {
   };
 
   return (
-    <div>
-      <h2>Become an Admin</h2>
-      <button onClick={handleBecomeAdmin}>Become Admin</button>
-    </div>
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 2,
+          p: 2,
+          bgcolor: '#ffffff',
+          borderRadius: 2,
+          boxShadow: 2,
+        }}
+      >
+        <Typography variant="h5" sx={{ color: '#0D47A1' }}>
+          Become a Admin
+        </Typography>
+        <Button
+          variant="contained"
+          onClick={handleBecomeAdmin}
+          sx={{
+            backgroundColor: '#0D47A1',
+            color: '#fff',
+            '&:hover': { backgroundColor: '#0A356E' },
+          }}
+        >
+          Become Admin
+        </Button>
+      </Box>
+    </Container>
   );
 }
 

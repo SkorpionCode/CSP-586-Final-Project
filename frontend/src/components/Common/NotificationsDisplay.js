@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
+import { Box, Paper, Typography, List, ListItem, ListItemText } from '@mui/material';
 
 let socket;
 
@@ -14,6 +15,7 @@ function NotificationsDisplay() {
     if (username) {
       socket = io('http://localhost:5000');
       socket.on('notification', (data) => {
+        // Only process notifications meant for the current user
         if (data.username === username) {
           setNotifications((prev) => [data, ...prev]);
         }
@@ -46,38 +48,48 @@ function NotificationsDisplay() {
   }
 
   const handleBoxClick = () => {
-    setIsExpanded(!isExpanded);
+    setIsExpanded((prev) => !prev);
   };
 
   return (
-    <div
-      style={{
+    <Box
+      onClick={handleBoxClick}
+      sx={{
         position: 'fixed',
         bottom: 10,
         right: 10,
-        border: '1px solid #ccc',
-        padding: '10px',
-        background: '#fff',
-        zIndex: 1000,
-        maxWidth: isExpanded ? '300px' : '100px',
-        maxHeight: isExpanded ? '400px' : '50px',
-        overflowY: isExpanded ? 'auto' : 'hidden',
         cursor: 'pointer',
+        zIndex: 1000,
       }}
-      onClick={handleBoxClick}
     >
-      <h4>Notifications</h4>
-      {isExpanded && (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {notifications.map((note, idx) => (
-            <li key={idx}>
-              {note.message} <br />
-              <small>{new Date(note.created_at).toLocaleTimeString()}</small>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+      <Paper
+        elevation={3}
+        sx={{
+          p: 2,
+          bgcolor: '#fff',
+          width: isExpanded ? 300 : 100,
+          height: isExpanded ? 400 : 50,
+          overflowY: isExpanded ? 'auto' : 'hidden',
+          transition: 'all 0.3s ease-in-out',
+        }}
+      >
+        <Typography variant="h6" sx={{ mb: isExpanded ? 2 : 0 }}>
+          Notifications
+        </Typography>
+        {isExpanded && (
+          <List dense>
+            {notifications.map((note, idx) => (
+              <ListItem key={idx}>
+                <ListItemText
+                  primary={note.message}
+                  secondary={new Date(note.created_at).toLocaleTimeString()}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Paper>
+    </Box>
   );
 }
 

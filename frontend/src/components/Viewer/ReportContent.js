@@ -1,12 +1,26 @@
 // src/components/Viewer/ReportContent.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import {
+  Container,
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 
 function ReportContent() {
   const [reportType, setReportType] = useState('stream');
   const [targetName, setTargetName] = useState(''); // Stream title or username
   const [description, setDescription] = useState('');
-  const username = localStorage.getItem('username');
+  // Assuming username is stored locally on login
+  const username = localStorage.getItem('username') || 'Anonymous';
 
   const handleReport = async (e) => {
     e.preventDefault();
@@ -36,39 +50,64 @@ function ReportContent() {
   };
 
   return (
-    <div>
-      <h2>Report Content</h2>
-      <form onSubmit={handleReport}>
-        <label>
-          Report Type:
-          <select value={reportType} onChange={(e) => setReportType(e.target.value)}>
-            <option value="stream">Stream</option>
-            <option value="user">User</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          {reportType === 'stream' ? 'Stream Title:' : 'Username:'}
-          <input
-            type="text"
-            value={targetName}
-            onChange={(e) => setTargetName(e.target.value)}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Description:
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </label>
-        <br />
-        <button type="submit">Submit Report</button>
-      </form>
-    </div>
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Card>
+        <CardContent>
+          <Typography variant="h4" align="center" sx={{ mb: 2, color: '#0D47A1' }}>
+            Report Content
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleReport}
+            noValidate
+            sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+          >
+            <FormControl fullWidth>
+              <InputLabel id="report-type-label">Report Type</InputLabel>
+              <Select
+                labelId="report-type-label"
+                value={reportType}
+                label="Report Type"
+                onChange={(e) => setReportType(e.target.value)}
+              >
+                <MenuItem value="stream">Stream</MenuItem>
+                <MenuItem value="user">User</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              label={reportType === 'stream' ? 'Stream Title' : 'Username'}
+              variant="outlined"
+              fullWidth
+              value={targetName}
+              onChange={(e) => setTargetName(e.target.value)}
+              required
+            />
+            <TextField
+              label="Description"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                backgroundColor: '#0D47A1',
+                color: '#fff',
+                '&:hover': { backgroundColor: '#0A356E' },
+              }}
+            >
+              Submit Report
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </Container>
   );
 }
 

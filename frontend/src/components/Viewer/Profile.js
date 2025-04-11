@@ -1,31 +1,42 @@
 // src/components/Viewer/Profile.js
 import React, { useState, useEffect } from 'react';
+import { Container, TextField, Button, Typography, Box, Card, CardContent } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
-  const [profile, setProfile] = useState({});
   const token = localStorage.getItem('token');
-  const username = localStorage.getItem('username')
-  const email = localStorage.getItem('email')
-  const role = localStorage.getItem('role')
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState({
+    username: localStorage.getItem('username'),
+    email: localStorage.getItem('email'),
+    profile_picture: '',
+    bio: '',
+    role: localStorage.getItem('role'),
+  });
 
   useEffect(() => {
-    axios.get('http://localhost:5000/profile', {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
-    .then(response => setProfile(response.data))
-    .catch(error => console.error('Error fetching profile', error));
+    axios
+      .get('http://localhost:5000/profile', {
+        headers: { 'Authorization': `Bearer ${token}` },
+      })
+      .then((response) => {
+        setProfile(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching profile:', error);
+      });
   }, [token]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       await axios.put('http://localhost:5000/profile', profile, {
-        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }
+        headers: { 'Authorization': `Bearer ${token}` },
       });
       alert('Profile updated!');
     } catch (error) {
-      alert('Error updating profile');
+      alert('Error updating profile: ' + (error.response?.data?.msg || error.message));
     }
   };
 
@@ -34,34 +45,49 @@ function Profile() {
   };
 
   return (
-    <div>
-      <h2>Your Profile</h2>
-      <form onSubmit={handleUpdate}>
-        <p>Username: {username}</p>
-        <p>Email: {email}</p>
-        <p>Role: {role}</p>
-        <label>
-          Profile Picture URL:
-          <input 
-            type="text" 
-            name="profile_picture" 
-            value={profile.profile_picture || ''} 
-            onChange={handleChange} 
-          />
-        </label>
-        <br />
-        <label>
-          Bio:
-          <textarea 
-            name="bio" 
-            value={profile.bio || ''} 
-            onChange={handleChange} 
-          />
-        </label>
-        <br />
-        <button type="submit">Update Profile</button>
-      </form>
-    </div>
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Card>
+        <CardContent>
+          <Typography variant="h4" sx={{ mb: 2, color: '#0D47A1' }}>
+            Your Profile
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 2 }}>
+            Username: {profile.username}
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 2 }}>
+            Email: {profile.email}
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 2 }}>
+            Role: {profile.role}
+          </Typography>
+          <Box component="form" onSubmit={handleUpdate} noValidate>
+            <TextField
+              label="Profile Picture URL"
+              name="profile_picture"
+              variant="outlined"
+              fullWidth
+              value={profile.profile_picture || ''}
+              onChange={handleChange}
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              label="Bio"
+              name="bio"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+              value={profile.bio || ''}
+              onChange={handleChange}
+              sx={{ mb: 2 }}
+            />
+            <Button type="submit" fullWidth variant="contained" sx={{ backgroundColor: '#0D47A1', color: '#fff', '&:hover': { backgroundColor: '#0A356E' } }}>
+              Update Profile
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </Container>
   );
 }
 
