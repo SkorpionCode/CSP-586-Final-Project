@@ -60,6 +60,11 @@ function Header() {
             <Button color="inherit" onClick={() => navigate('/become-streamer')}>
               Become Streamer
             </Button>
+            {(role === 'streamer' || role === 'admin') && (
+              <Button color="inherit" onClick={() => navigate('/schedule')}>
+                Schedule Stream
+              </Button>
+            )}
             <Button color="inherit" onClick={() => navigate('/become-admin')}>
               Become Admin
             </Button>

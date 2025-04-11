@@ -5,12 +5,14 @@ import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 function Signup() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [username, setUsername]     = useState('');
+  const [email, setEmail]           = useState('');
+  const [password, setPassword]     = useState('');
+  const navigate                  = useNavigate();
+  
+  // Focus states for styling, as before.
   const [usernameFocused, setUsernameFocused] = useState(false);
-  const [emailFocused, setEmailFocused] = useState(false);
+  const [emailFocused, setEmailFocused]       = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
 
   const handleSignup = async (e) => {
@@ -22,17 +24,23 @@ function Signup() {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/signup', { username, email, password });
-      localStorage.setItem('role', response.data.role);
-      if (response.data.user_id) {
-        localStorage.setItem('user_id', response.data.user_id);
-        localStorage.setItem('username', response.data.username);
-        localStorage.setItem('email', response.data.email);
-        localStorage.setItem('role', response.data.role);
-      }
-      alert('Account created successfully!');
+      // First, send a signup request.
+      await axios.post('http://localhost:5000/signup', { username, email, password });
+      alert('Account created successfully! Logging you in...');
+
+      // Auto-login: Send a login request using the same credentials.
+      const loginResponse = await axios.post('http://localhost:5000/login', { username, password });
+      
+      // Store login data (including username) in localStorage.
+      localStorage.setItem('token', loginResponse.data.access_token);
+      localStorage.setItem('role', loginResponse.data.role);
+      localStorage.setItem('user_id', loginResponse.data.user_id);
+      localStorage.setItem('email', loginResponse.data.email);
+      localStorage.setItem('username', loginResponse.data.username);
+
+      // Navigate to the browse page and reload so the header updates.
       navigate('/browse');
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       alert('Signup failed: ' + (error.response?.data?.msg || error));
     }
@@ -84,9 +92,9 @@ function Signup() {
                 borderColor: usernameFocused ? '#0D47A1' : undefined,
                 borderWidth: usernameFocused ? '2px' : '1px',
               },
-              '&:hover fieldset':{
+              '&:hover fieldset': {
                 borderColor: usernameFocused ? '#0D47A1' : undefined,
-              }
+              },
             },
           }}
         />
@@ -111,9 +119,9 @@ function Signup() {
                 borderColor: emailFocused ? '#0D47A1' : undefined,
                 borderWidth: emailFocused ? '2px' : '1px',
               },
-              '&:hover fieldset':{
+              '&:hover fieldset': {
                 borderColor: emailFocused ? '#0D47A1' : undefined,
-              }
+              },
             },
           }}
         />
@@ -138,9 +146,9 @@ function Signup() {
                 borderColor: passwordFocused ? '#0D47A1' : undefined,
                 borderWidth: passwordFocused ? '2px' : '1px',
               },
-              '&:hover fieldset':{
+              '&:hover fieldset': {
                 borderColor: passwordFocused ? '#0D47A1' : undefined,
-              }
+              },
             },
           }}
         />

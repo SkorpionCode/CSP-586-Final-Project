@@ -11,12 +11,20 @@ function BecomeStreamer() {
 
   const handleBecomeStreamer = async () => {
     try {
-      // Pass null as payload so no empty JSON is sent.
+      // Call the backend endpoint to update the user's role.
       await axios.post('http://localhost:5000/become-streamer', {username}, {
         headers: { 'Authorization': `Bearer ${token}` },
       });
       alert('You are now a streamer!');
+
+      // Update the localStorage so the updated role is reflected immediately.
+      localStorage.setItem('role', 'streamer');
+
+      // Navigate to the stream setup page.
       navigate('/stream-setup');
+
+      // Optionally, force a page reload so that the Header re-renders with the new role.
+      window.location.reload();
     } catch (error) {
       console.error('Error becoming a streamer:', error);
       alert('Error: ' + (error.response?.data?.msg || error.message));
