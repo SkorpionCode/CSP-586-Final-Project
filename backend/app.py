@@ -413,9 +413,21 @@ def create_app():
         title = request.args.get('title')
         stream = Stream.query.filter_by(title=title).first()
         if stream:
-            return jsonify({'user_id': stream.user_id}), 200
+            return jsonify({'streamer_id': stream.streamer_id}), 200
         else:
             return jsonify({'error': 'Stream not found'}), 404
+
+    @app.route('/username-by-id', methods=['GET'])
+    def username_by_id():
+        user_id = request.args.get('id')
+        if not user_id:
+            return jsonify({'error': 'User ID is required'}), 400
+
+        user = User.query.get(user_id)
+        if user:
+            return jsonify({'username': user.username}), 200
+        else:
+            return jsonify({'error': 'User not found'}), 404
 
     @app.route('/admin/suspend/<int:user_id>', methods=['POST'])
     def suspend_account(user_id):

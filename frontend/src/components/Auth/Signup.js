@@ -1,49 +1,65 @@
 // src/components/Auth/Signup.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const [username, setUsername] = useState('');
-  const [email, setEmail]     = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [usernameFocused, setUsernameFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    if (!username || !email || !password) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:5000/signup', { username, email, password });
       localStorage.setItem('role', response.data.role);
       if (response.data.user_id) {
         localStorage.setItem('user_id', response.data.user_id);
         localStorage.setItem('username', response.data.username);
-        localStorage.setItem('email', response.data.email)
-        localStorage.setItem('role', response.data.role)
+        localStorage.setItem('email', response.data.email);
+        localStorage.setItem('role', response.data.role);
       }
       alert('Account created successfully!');
-      navigate('/login');
+      navigate('/browse');
+      window.location.reload()
     } catch (error) {
       alert('Signup failed: ' + (error.response?.data?.msg || error));
     }
   };
 
+  const handleLoginNavigation = () => {
+    navigate('/login');
+  };
+
+  const isFormValid = username && email && password;
+
   return (
     <Container
       maxWidth="sm"
       sx={{
-        backgroundColor: "#ffffff",
+        backgroundColor: '#ffffff',
         padding: 4,
         marginTop: 8,
         borderRadius: 2,
-        boxShadow: "0px 0px 10px rgba(0,0,0,0.1)",
+        boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
       }}
     >
-      <Typography 
-        variant="h4" 
-        component="h1" 
-        align="center" 
-        sx={{ color: "#0D47A1", marginBottom: 2 }}
+      <Typography
+        variant="h4"
+        component="h1"
+        align="center"
+        sx={{ color: '#0D47A1', marginBottom: 2 }}
       >
         Signup
       </Typography>
@@ -55,7 +71,24 @@ function Signup() {
           required
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          sx={{ marginBottom: 2 }}
+          onFocus={() => setUsernameFocused(true)}
+          onBlur={() => setUsernameFocused(username.length > 0)}
+          sx={{
+            marginBottom: 2,
+            '& .MuiOutlinedInput-root': {
+              '&.Mui-focused fieldset, & fieldset.Mui-focused': { // Adjusted for consistent width
+                borderColor: '#0D47A1',
+                borderWidth: '2px', // Increase border width for better visibility
+              },
+              '& fieldset': {
+                borderColor: usernameFocused ? '#0D47A1' : undefined,
+                borderWidth: usernameFocused ? '2px' : '1px', // Maintain width after focus
+              },
+              '&:hover fieldset':{
+                borderColor: usernameFocused ? '#0D47A1' : undefined, // Maintain highlight color on hover
+              }
+            },
+          }}
         />
         <TextField
           label="Email"
@@ -65,7 +98,24 @@ function Signup() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          sx={{ marginBottom: 2 }}
+          onFocus={() => setEmailFocused(true)}
+          onBlur={() => setEmailFocused(email.length > 0)}
+          sx={{
+            marginBottom: 2,
+            '& .MuiOutlinedInput-root': {
+              '&.Mui-focused fieldset, & fieldset.Mui-focused': { // Adjusted for consistent width
+                borderColor: '#0D47A1',
+                borderWidth: '2px', // Increase border width for better visibility
+              },
+              '& fieldset': {
+                borderColor: emailFocused ? '#0D47A1' : undefined,
+                borderWidth: emailFocused ? '2px' : '1px', // Maintain width after focus
+              },
+              '&:hover fieldset':{
+                borderColor: emailFocused ? '#0D47A1' : undefined, // Maintain highlight color on hover
+              }
+            },
+          }}
         />
         <TextField
           label="Password"
@@ -75,20 +125,51 @@ function Signup() {
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          sx={{ marginBottom: 2 }}
+          onFocus={() => setPasswordFocused(true)}
+          onBlur={() => setPasswordFocused(password.length > 0)}
+          sx={{
+            marginBottom: 2,
+            '& .MuiOutlinedInput-root': {
+              '&.Mui-focused fieldset, & fieldset.Mui-focused': { // Adjusted for consistent width
+                borderColor: '#0D47A1',
+                borderWidth: '2px', // Increase border width for better visibility
+              },
+              '& fieldset': {
+                borderColor: passwordFocused ? '#0D47A1' : undefined,
+                borderWidth: passwordFocused ? '2px' : '1px', // Maintain width after focus
+              },
+              '&:hover fieldset':{
+                borderColor: passwordFocused ? '#0D47A1' : undefined, // Maintain highlight color on hover
+              }
+            },
+          }}
         />
         <Button
           type="submit"
           fullWidth
           variant="contained"
+          disabled={!isFormValid}
           sx={{
-            backgroundColor: "#0D47A1",
-            color: "#ffffff",
-            "&:hover": { backgroundColor: "#0A356E" },
+            backgroundColor: isFormValid ? '#0D47A1' : '#BDBDBD',
+            color: '#ffffff',
+            '&:hover': { backgroundColor: isFormValid ? '#0A356E' : '#BDBDBD' },
             marginTop: 1,
           }}
         >
           Signup
+        </Button>
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{
+            backgroundColor: '#0D47A1',
+            color: '#ffffff',
+            '&:hover': { backgroundColor: '#0A356E' },
+            marginTop: 1,
+          }}
+          onClick={handleLoginNavigation}
+        >
+          Log In
         </Button>
       </Box>
     </Container>
