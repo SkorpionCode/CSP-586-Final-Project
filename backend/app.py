@@ -441,7 +441,6 @@ def create_app():
     @app.route('/admin/unsuspend/<string:username>', methods=['POST'])
     def unsuspend_account(username):
         admin_username = request.args.get('admin_username')
-        logging.info(f"ADMIN USERNAME: { admin_username }")
         admin = User.query.filter_by(username=admin_username).first()
 
         if not admin:
