@@ -43,7 +43,7 @@ function Header() {
         </Button>
       );
     }
-    return null; // Return null if not on login or signup
+    return null;
   };
 
   return (
@@ -79,7 +79,7 @@ function Header() {
             </Button>
           </Box>
         ) : (
-          renderAuthButton() // Render the conditional button
+          renderAuthButton()
         )}
       </Toolbar>
     </AppBar>

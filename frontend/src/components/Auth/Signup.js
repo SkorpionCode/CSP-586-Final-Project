@@ -76,16 +76,16 @@ function Signup() {
           sx={{
             marginBottom: 2,
             '& .MuiOutlinedInput-root': {
-              '&.Mui-focused fieldset, & fieldset.Mui-focused': { // Adjusted for consistent width
+              '&.Mui-focused fieldset, & fieldset.Mui-focused': {
                 borderColor: '#0D47A1',
-                borderWidth: '2px', // Increase border width for better visibility
+                borderWidth: '2px',
               },
               '& fieldset': {
                 borderColor: usernameFocused ? '#0D47A1' : undefined,
-                borderWidth: usernameFocused ? '2px' : '1px', // Maintain width after focus
+                borderWidth: usernameFocused ? '2px' : '1px',
               },
               '&:hover fieldset':{
-                borderColor: usernameFocused ? '#0D47A1' : undefined, // Maintain highlight color on hover
+                borderColor: usernameFocused ? '#0D47A1' : undefined,
               }
             },
           }}
@@ -103,16 +103,16 @@ function Signup() {
           sx={{
             marginBottom: 2,
             '& .MuiOutlinedInput-root': {
-              '&.Mui-focused fieldset, & fieldset.Mui-focused': { // Adjusted for consistent width
+              '&.Mui-focused fieldset, & fieldset.Mui-focused': {
                 borderColor: '#0D47A1',
-                borderWidth: '2px', // Increase border width for better visibility
+                borderWidth: '2px',
               },
               '& fieldset': {
                 borderColor: emailFocused ? '#0D47A1' : undefined,
-                borderWidth: emailFocused ? '2px' : '1px', // Maintain width after focus
+                borderWidth: emailFocused ? '2px' : '1px',
               },
               '&:hover fieldset':{
-                borderColor: emailFocused ? '#0D47A1' : undefined, // Maintain highlight color on hover
+                borderColor: emailFocused ? '#0D47A1' : undefined,
               }
             },
           }}
@@ -130,16 +130,16 @@ function Signup() {
           sx={{
             marginBottom: 2,
             '& .MuiOutlinedInput-root': {
-              '&.Mui-focused fieldset, & fieldset.Mui-focused': { // Adjusted for consistent width
+              '&.Mui-focused fieldset, & fieldset.Mui-focused': {
                 borderColor: '#0D47A1',
-                borderWidth: '2px', // Increase border width for better visibility
+                borderWidth: '2px',
               },
               '& fieldset': {
                 borderColor: passwordFocused ? '#0D47A1' : undefined,
-                borderWidth: passwordFocused ? '2px' : '1px', // Maintain width after focus
+                borderWidth: passwordFocused ? '2px' : '1px',
               },
               '&:hover fieldset':{
-                borderColor: passwordFocused ? '#0D47A1' : undefined, // Maintain highlight color on hover
+                borderColor: passwordFocused ? '#0D47A1' : undefined,
               }
             },
           }}
