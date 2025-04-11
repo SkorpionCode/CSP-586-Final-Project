@@ -12,6 +12,7 @@ import BrowseStreams from './components/Viewer/BrowseStreams';
 import StreamViewer from './components/Viewer/StreamViewer';
 import Chat from './components/Viewer/Chat';
 import BecomeStreamer from './components/Viewer/BecomeStreamer';
+import BecomeAdmin from './components/Viewer/BecomeAdmin';
 import ReportContent from './components/Viewer/ReportContent';
 
 // ----- Streamer Components -----
@@ -45,6 +46,7 @@ function App() {
         <Route path="/stream/:id" element={<StreamViewer />} />
         <Route path="/chat/:streamId" element={<Chat />} />
         <Route path="/become-streamer" element={<BecomeStreamer />} />
+        <Route path="/become-admin" element={<BecomeAdmin />} />
         <Route path="/report" element={<ReportContent />} />
 
         {/* Streamer Routes */}

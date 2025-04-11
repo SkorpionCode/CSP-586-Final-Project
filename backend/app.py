@@ -7,12 +7,16 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from models import db, User, Stream, Follow, Report, ChatMessage, Notification
 import os
+import logging
 
 # Initialize SocketIO with CORS allowed origins for development
 socketio = SocketIO(cors_allowed_origins="*")
 
 def create_app():
     app = Flask(__name__)
+
+    logging.basicConfig(level=logging.DEBUG)
+
     # App configuration
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///streaming.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -27,6 +31,7 @@ def create_app():
 
     # Create database tables if they don't exist
     with app.app_context():
+        #db.drop_all()
         db.create_all()
 
     @jwt.unauthorized_loader
@@ -128,16 +133,62 @@ def create_app():
         return jsonify({'msg': 'Now following the streamer'}), 200
 
     @app.route('/report', methods=['POST'])
-    @jwt_required()
     def report_content():
-        user_id = get_jwt_identity()
         data = request.get_json()
-        stream_id = data.get('stream_id')
+
+        username = data.get('username')
+        stream_title = data.get('stream_title')
+        reported_username = data.get('reported_username')
         description = data.get('description')
-        report = Report(reporter_id=user_id, stream_id=stream_id, description=description)
-        db.session.add(report)
-        db.session.commit()
-        return jsonify({'msg': 'Report submitted'}), 200
+
+        if not username:
+            return jsonify({'error': 'Username is required'}), 400
+
+        reporter_user = User.query.filter_by(username=username).first()
+        if not reporter_user:
+            return jsonify({'error': 'Reporter user not found'}), 404
+
+        reporter_id = reporter_user.id
+
+        stream_id = None
+        reported_user_id = None
+
+        if stream_title:
+            stream = Stream.query.filter_by(title=stream_title).first()
+            if stream:
+                stream_id = stream.id
+            else:
+                return jsonify({'error': 'Stream not found'}), 404
+
+        if reported_username:
+            reported_user = User.query.filter_by(username=reported_username).first()
+            if reported_user:
+                reported_user_id = reported_user.id
+            else:
+                return jsonify({'error': 'User not found'}), 404
+
+        if stream_id is None and reported_user_id is None:
+            return jsonify({'error': 'Stream title or username required'}), 400
+
+        if reported_user_id and reporter_id == reported_user_id:
+                return jsonify({'msg': 'You cannot report yourself.'}), 400
+
+        try:
+            report = Report(
+                reporter_id=reporter_id,
+                stream_id=stream_id,
+                reported_user_id=reported_user_id,
+                description=description,
+            )
+            db.session.add(report)
+            db.session.commit()
+
+            return jsonify({'message': 'Report submitted successfully'}), 200
+
+        except Exception as e:
+            db.session.rollback()
+            logging.error(f"Error submitting report: {e}")
+            return jsonify({'error': 'Failed to submit report'}), 500
 
     @app.route('/profile', methods=['GET', 'PUT'])
     def customize_profile():
@@ -173,6 +224,15 @@ def create_app():
         user.role = 'streamer'
         db.session.commit()
         return jsonify({'msg': 'You are now a streamer'}), 200
+
+    @app.route('/become-admin', methods=['POST'])
+    def become_admin():
+        data = request.get_json()
+        username = data.get('username')
+        user = User.query.filter_by(username=username).first()
+        user.role = 'admin'
+        db.session.commit()
+        return jsonify({'msg': 'You are now an admin'}), 200
 
     @app.route('/chat/<int:stream_id>', methods=['GET', 'POST'])
     def chat_in_stream(stream_id):
@@ -307,52 +367,163 @@ def create_app():
     # Admin Endpoints
     # ---------------------
     @app.route('/admin/reports', methods=['GET'])
-    @jwt_required()
     def review_reports():
-        admin_id = get_jwt_identity()
-        admin = User.query.get(admin_id)
-        if admin.role != 'admin':
+        username = request.args.get('username')
+
+        if not username:
+            return jsonify({'msg': 'Username is required'}), 400
+
+        user = User.query.filter_by(username=username).first()
+        if not user:
+            return jsonify({'msg': 'User not found'}), 404
+
+        if user.role != 'admin':
             return jsonify({'msg': 'Unauthorized action'}), 403
-        reports = Report.query.all()
-        result = [{
-            'id': r.id,
-            'reporter_id': r.reporter_id,
-            'stream_id': r.stream_id,
-            'description': r.description,
-            'created_at': r.created_at.isoformat()
-        } for r in reports]
-        return jsonify(result), 200
+
+        active_reports = Report.query.filter_by(active=True).all()
+        inactive_reports = Report.query.filter_by(active=False).all()
+
+        def format_report(r):
+            reporter_user = db.session.get(User, r.reporter_id)
+            reported_user = db.session.get(User, r.reported_user_id) if r.reported_user_id else None
+            stream = db.session.get(Stream, r.stream_id) if r.stream_id else None
+
+            return {
+                'id': r.id,
+                'reporter_username': reporter_user.username if reporter_user else None,
+                'reported_username': reported_user.username if reported_user else None,
+                'stream_title': stream.title if stream else None,
+                'description': r.description,
+                'created_at': r.created_at.isoformat() if r.created_at else None,
+                'active': r.active
+            }
+
+        return jsonify({
+            'active_reports': [format_report(r) for r in active_reports],
+            'inactive_reports': [format_report(r) for r in inactive_reports]
+        }), 200
+
+    @app.route('/user-id-by-username', methods=['GET'])
+    def user_id_by_username():
+        username = request.args.get('username')
+        user = User.query.filter_by(username=username).first()
+        if user:
+            return jsonify({'user_id': user.id}), 200
+        else:
+            return jsonify({'error': 'User not found'}), 404
+
+    @app.route('/stream-owner-id-by-title', methods=['GET'])
+    def stream_owner_id_by_title():
+        title = request.args.get('title')
+        stream = Stream.query.filter_by(title=title).first()
+        if stream:
+            return jsonify({'user_id': stream.user_id}), 200
+        else:
+            return jsonify({'error': 'Stream not found'}), 404
 
     @app.route('/admin/suspend/<int:user_id>', methods=['POST'])
-    @jwt_required()
     def suspend_account(user_id):
-        admin_id = get_jwt_identity()
-        admin = User.query.get(admin_id)
+        user = User.query.get_or_404(user_id)
+        username = request.args.get('username')
+        admin = User.query.filter_by(username=username).first()
+
+        if not admin:
+            return jsonify({'msg': 'Admin user not found'}), 404
+
         if admin.role != 'admin':
             return jsonify({'msg': 'Unauthorized action'}), 403
+        
         user = User.query.get_or_404(user_id)
         user.suspended = True
         db.session.commit()
         return jsonify({'msg': f'User {user.username} has been suspended'}), 200
 
-    @app.route('/admin/notifications', methods=['POST'])
-    @jwt_required()
-    def platform_notifications():
-        admin_id = get_jwt_identity()
-        admin = User.query.get(admin_id)
+    @app.route('/admin/unsuspend/<string:username>', methods=['POST'])
+    def unsuspend_account(username):
+        admin_username = request.args.get('admin_username')
+        admin = User.query.filter_by(username=admin_username).first()
+
+        if not admin:
+            return jsonify({'msg': 'Admin user not found'}), 404
+
         if admin.role != 'admin':
             return jsonify({'msg': 'Unauthorized action'}), 403
+
+        user = User.query.filter_by(username=username).first()
+        if not user:
+            return jsonify({'msg': 'User not found'}), 404
+
+        user.suspended = False
+        db.session.commit()
+        return jsonify({'msg': f'User {user.username} has been unsuspended.'}), 200
+
+    @app.route('/handle-report', methods=['POST'])
+    def handle_report():
+        data = request.get_json()
+        report_id = data.get('report_id')
+
+        report = Report.query.get(report_id)
+        if report:
+            report.active = False
+            db.session.commit()
+            return jsonify({'message': 'Report handled successfully'}), 200
+        else:
+            return jsonify({'error': 'Report not found'}), 404
+
+    @app.route('/admin/notifications', methods=['POST'])
+    def platform_notifications():
         data = request.get_json()
         message = data.get('message')
-        notification = Notification(message=message)
-        db.session.add(notification)
+        report_id = data.get('reportId')
+        username = request.args.get('username')
+        notification_type = data.get('type')
+
+        if not message:
+            return jsonify({'msg': 'Message is required'}), 400
+
+        admin = User.query.filter_by(username=username).first()
+        if not admin:
+            return jsonify({'msg': 'Admin user not found'}), 404
+
+        if admin.role != 'admin':
+            return jsonify({'msg': 'Unauthorized action'}), 403
+
+        report = Report.query.get(report_id)
+        if not report:
+            return jsonify({'msg': 'Report not found'}), 404
+
+        new_notification = Notification(message=message, report_id=report_id, reporter_id = report.reporter_id, type=notification_type)
+        db.session.add(new_notification)
         db.session.commit()
-        # Broadcast notification to all clients
-        socketio.emit('notification', {
-            'message': message,
-            'created_at': notification.created_at.isoformat()
-        })
-        return jsonify({'msg': 'Notification sent'}), 200
+
+        return jsonify({'msg': 'Notification sent successfully'}), 200
+
+    @app.route('/api/notifications', methods=['GET'])
+    def get_notifications():
+        username = request.args.get('username')
+
+        if not username:
+            return jsonify({'error': 'Username is required'}), 400
+
+        user = User.query.filter_by(username=username).first()
+
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+
+        notifications = Notification.query.filter_by(reporter_id=user.id).order_by(Notification.created_at.desc()).all()
+
+        notification_list = []
+        for notification in notifications:
+            notification_list.append({
+                'id': notification.id,
+                'message': notification.message,
+                'report_id': notification.report_id,
+                'created_at': notification.created_at.isoformat(),
+                'reporter_id': notification.reporter_id,
+                'type': notification.type
+            })
+
+        return jsonify(notification_list)
 
     # ---------------------
     # Socket.IO Event Handlers
