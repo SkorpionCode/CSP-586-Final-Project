@@ -1,6 +1,7 @@
 // src/components/Auth/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
@@ -28,25 +29,59 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-        <br />
-        <p>If you don't have an acconut: </p>
-        <Link to={`/signup`}>Sign Up</Link>
-      </form>
-    </div>
+    <Container
+      maxWidth="sm"
+      sx={{
+        backgroundColor: "#ffffff",
+        padding: 4,
+        marginTop: 8,
+        borderRadius: 2,
+        boxShadow: "0px 0px 10px rgba(0,0,0,0.1)",
+      }}
+    >
+      <Typography
+        variant="h4"
+        component="h1"
+        align="center"
+        sx={{ color: "#0D47A1", marginBottom: 2 }}
+      >
+        Login
+      </Typography>
+      <Box component="form" onSubmit={handleLogin} noValidate>
+        <TextField
+          label="Username"
+          variant="outlined"
+          fullWidth
+          required
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          sx={{ marginBottom: 2 }}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          variant="outlined"
+          fullWidth
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          sx={{ marginBottom: 2 }}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{
+            backgroundColor: "#0D47A1",
+            color: "#ffffff",
+            "&:hover": { backgroundColor: "#0A356E" },
+            marginTop: 1,
+          }}
+        >
+          Login
+        </Button>
+      </Box>
+    </Container>
   );
 }
 

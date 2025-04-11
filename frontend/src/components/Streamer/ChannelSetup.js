@@ -22,7 +22,6 @@ function ChannelSetup() {
         { headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' } }
       );
       alert('Stream setup completed!');
-      history.push(`/go-live/${response.data.stream_id}`);
     } catch (error) {
       alert('Error setting up stream');
     }

@@ -2,69 +2,69 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Container, Card, CardContent, Typography, Box, Button, Divider } from '@mui/material';
 
 function GoLive() {
   const { streamId } = useParams();
+  const navigate = useNavigate();
   const videoRef = useRef(null);
   const [streaming, setStreaming] = useState(false);
   const [streamData, setStreamData] = useState(null);
-  const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const username = localStorage.getItem('username')
+  const username = localStorage.getItem('username');
 
-  const rtmpUrl = `rtmp://localhost/live`;
-  const streamKey = `stream_${streamId}`;
-
+  // Fetch current stream state on mount.
   useEffect(() => {
     const fetchStreamStatus = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/stream/${streamId}`);
         setStreamData(response.data);
-        // Set streaming to true if the stream is live.
         if (response.data.is_live && response.data.stream_url) {
           setStreaming(true);
         } else {
           setStreaming(false);
         }
       } catch (error) {
-        console.error('Error fetching stream status:', error);
+        console.error("Error fetching stream status:", error);
       }
     };
-
     fetchStreamStatus();
   }, [streamId]);
 
+  // RTMP configuration for OBS (for development, using localhost)
+  const rtmpUrl = "rtmp://localhost/live";
+  const streamKey = `stream_${streamId}`;
+
+  // Handle starting the stream.
   const handleStartStreaming = async () => {
-    // The streamer must configure OBS to stream to `rtmpUrl` with the given stream key.
-    // Once OBS is streaming, trigger the backend to mark the stream as live.
     try {
-      const response = await axios.post(`http://localhost:5000/stream/go-live/${streamId}`,
+      await axios.post(
+        `http://localhost:5000/stream/go-live/${streamId}`,
         {username},
         { headers: { 'Authorization': `Bearer ${token}` } }
       );
       setStreaming(true);
-      alert(`Your stream is now live! Please configure OBS with:
-      RTMP URL: ${rtmpUrl}
-      Stream Key: ${streamKey}`);
+      alert(`Your stream is now live!
+Configure OBS with:
+RTMP URL: ${rtmpUrl}
+Stream Key: ${streamKey}`);
       navigate(`/stream/${streamId}`);
     } catch (error) {
-      console.error('Error starting live stream:', error);
-      alert('Error starting stream: ' + (error.response?.data?.msg || error.message));
+      console.error("Error starting live stream:", error);
+      alert("Error starting stream: " + (error.response?.data?.msg || error.message));
     }
   };
 
+  // Handle stopping the stream.
   const handleStopStreaming = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `http://localhost:5000/stream/stop/${streamId}`,
-        {username}, // No payload needed
-        {
-          headers: { "Authorization": `Bearer ${token}` }
-        }
+        {username},
+        { headers: { 'Authorization': `Bearer ${token}` } }
       );
       setStreaming(false);
       alert("Your stream has ended.");
-      // Optionally, navigate back to a dashboard or refresh the component.
     } catch (error) {
       console.error("Error stopping live stream:", error);
       alert("Error stopping stream: " + (error.response?.data?.msg || error.message));
@@ -72,17 +72,44 @@ function GoLive() {
   };
 
   return (
-    <div>
-      <h2>Go Live</h2>
-      <p>Configure OBS as follows:</p>
-      <p>RTMP URL: <strong>{rtmpUrl}</strong></p>
-      <p>Stream Key: <strong>{streamKey}</strong></p>
-      {streaming ? (
-        <button onClick={handleStopStreaming}>Stop Stream</button>
-      ) : (
-        <button onClick={handleStartStreaming}>Start Live Stream</button>
-      )}
-    </div>
+    <Container maxWidth="sm" sx={{ marginTop: 4 }}>
+      <Card>
+        <CardContent>
+          <Typography variant="h4" sx={{ color: '#0D47A1', marginBottom: 2 }}>
+            Go Live
+          </Typography>
+          <Divider sx={{ marginY: 2 }} />
+          <Typography variant="body1" sx={{ marginBottom: 1 }}>
+            Configure OBS as follows:
+          </Typography>
+          <Typography variant="body2" sx={{ color: '#0D47A1' }}>
+            RTMP URL: <strong>{rtmpUrl}</strong>
+          </Typography>
+          <Typography variant="body2" sx={{ color: '#0D47A1', marginBottom: 2 }}>
+            Stream Key: <strong>{streamKey}</strong>
+          </Typography>
+          {streaming ? (
+            <Button
+              variant="contained"
+              color="error"
+              fullWidth
+              onClick={handleStopStreaming}
+            >
+              Stop Stream
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              fullWidth
+              onClick={handleStartStreaming}
+              sx={{ backgroundColor: "#0D47A1", color: "#fff", "&:hover": { backgroundColor: "#0A356E" } }}
+            >
+              Start Live Stream
+            </Button>
+          )}
+        </CardContent>
+      </Card>
+    </Container>
   );
 }
 

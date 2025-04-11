@@ -4,19 +4,29 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-// Create a socket connection instance.
+// Create a socket connection instance (you can also scope this inside useEffect)
 const socket = io('http://localhost:5000');
 
-function Chat() {
-  const { streamId } = useParams();
-  const navigate = useNavigate();
+function Chat({ streamId: propStreamId }) {
+  // Try to retrieve streamId from props; if not, use URL param.
+  const { streamId: paramStreamId } = useParams();
+  const streamId = propStreamId || paramStreamId;
+
+  // Check if streamId is defined; if not, log an error.
+  if (!streamId) {
+    console.error("Chat component: streamId is undefined. Ensure it is passed correctly.");
+  }
+  
   const [messages, setMessages] = useState([]); // Persistent chat history
   const [message, setMessage] = useState('');
+  // Assume username is stored in localStorage
   const username = localStorage.getItem('username') || 'Anonymous';
   const token = localStorage.getItem('token');
-
-  // Load persistent chat history and set up the socket listener on mount.
+  
+  // Load chat history and set up socket listeners on mount.
   useEffect(() => {
+    if (!streamId) return; // Exit early if streamId is not defined
+
     // Fetch persistent chat history from the backend.
     axios
       .get(`http://localhost:5000/chat/${streamId}`, {
@@ -39,34 +49,37 @@ function Chat() {
       setMessages(prevMessages => [...prevMessages, data]);
     });
 
-    // Clean up on component unmount.
+    // Cleanup on unmount.
     return () => {
       socket.emit('leave', { room });
       socket.off('chat'); // Remove event listener to prevent duplicates.
     };
   }, [streamId, token]);
 
-  // Function to handle sending a message.
   const handleSend = e => {
     e.preventDefault();
+    if (!streamId) {
+      console.error("Cannot send message because streamId is undefined.");
+      return;
+    }
     const room = 'stream_' + streamId;
-    // Emit the chat event with the room, message, and username.
+    // Emit the chat event, sending message and username.
     socket.emit('chat', { room, message, username });
     setMessage('');
   };
 
-  // Function to handle going back to the associated stream.
+  const navigate = useNavigate();
+
+  // Optional: A back button to go to the stream page.
   const handleBack = () => {
     navigate(`/stream/${streamId}`);
   };
 
   return (
     <div>
-      {/* Back Button */}
       <button onClick={handleBack} style={{ marginBottom: '10px' }}>
         ← Back to Stream
       </button>
-      
       <h2>Live Chat</h2>
       <div
         style={{
@@ -78,7 +91,7 @@ function Chat() {
       >
         {messages.map((msg, index) => (
           <div key={index}>
-            <strong>{msg.username || username}:</strong> {msg.message}{' '}
+            <strong>{msg.username ? msg.username : username}:</strong> {msg.message}{' '}
             <em>{new Date(msg.timestamp).toLocaleTimeString()}</em>
           </div>
         ))}

@@ -15,7 +15,6 @@ function BecomeStreamer() {
       });
       alert('You are now a streamer!');
       localStorage.setItem('role', 'streamer')
-      history.push('/stream-setup');
     } catch (error) {
       alert('Error becoming a streamer');
     }
