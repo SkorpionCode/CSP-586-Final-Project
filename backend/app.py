@@ -21,7 +21,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = 'super-secret-key'  # Change this in production!
 
-    CORS(app, resources={r"/*": {"origins": "*"}})
+    CORS(app, resources={r'/*': {'origins': '*'}})
 
     # Initialize extensions
     db.init_app(app)
@@ -189,7 +189,7 @@ def create_app():
                 db.session.commit()
                 return jsonify({'msg': 'Profile updated'}), 200
             except Exception as e:
-                app.logger.error("Error updating profile for user %s: %s", user_id, str(e))
+                app.logger.error('Error updating profile for user %s: %s', user_id, str(e))
                 return jsonify({'msg': 'Error updating profile', 'error': str(e)}), 500
         else:
             result = {
@@ -289,7 +289,7 @@ def create_app():
         if stream.streamer_id != user_id:
             return jsonify({'msg': 'Unauthorized action'}), 403
         stream.is_live = True
-        hls_url = f"http://localhost/hls/stream_{stream_id}.m3u8"
+        hls_url = f'http://localhost/hls/stream_{stream_id}.m3u8'
         stream.stream_url = hls_url
         db.session.commit()
         return jsonify({'msg': 'Stream is now live', 'stream_url': stream.stream_url}), 200
@@ -534,41 +534,22 @@ def create_app():
         leave_room(room)
         emit('notification', {'message': f'User has left {room}'}, room=room)
 
-    # @socketio.on('chat')
-    # def handle_chat(data):
-    #     room = data.get('room')
-    #     message = data.get('message')
-    #     username = data.get('username')
-    #     user = User.query.filter_by(username=username).first()
-    #     timestamp = datetime.utcnow().isoformat()
-    #     # Emit the chat event, including the username
-    #     emit('chat', {
-    #         'room': room,
-    #         'user_id': user.id,
-    #         'username': username,
-    #         'message': message,
-    #         'timestamp': timestamp
-    #     }, room=room)
-
     @socketio.on('chat')
     def handle_chat(data):
         room = data.get('room')  # Expected format: "stream_<stream_id>"
         message = data.get('message')
-        username = data.get('username')  # Provided from client-side localStorage
-        timestamp = datetime.utcnow()  # We'll use the DB record timestamp
+        username = data.get('username') 
+        timestamp = datetime.utcnow() 
 
-        # Optional: Log incoming data.
-        app.logger.info("Received chat: %s from %s in room %s", message, username, room)
-        
-        # Look up the user by username.
+        app.logger.info('Received chat: %s from %s in room %s', message, username, room)
         user = User.query.filter_by(username=username).first()
         user_id = user.id if user else None
 
         # Extract the stream_id from the room string: "stream_<id>"
         try:
-            stream_id = int(room.replace("stream_", ""))
+            stream_id = int(room.replace('stream_', ''))
         except Exception as e:
-            app.logger.error("Could not extract stream id from room %s: %s", room, str(e))
+            app.logger.error('Could not extract stream id from room %s: %s', room, str(e))
             return
 
         # Create and save the chat message to the database.
