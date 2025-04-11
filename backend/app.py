@@ -31,7 +31,6 @@ def create_app():
 
     # Create database tables if they don't exist
     with app.app_context():
-        #db.drop_all()
         db.create_all()
 
     @jwt.unauthorized_loader
@@ -258,8 +257,6 @@ def create_app():
             result = [{
                 'id': m.id,
                 'user_id': m.user_id,
-                # If m.sender exists, you might return m.sender.username;
-                # otherwise, fallback to "Unknown" or similar.
                 'username': m.sender.username if m.sender else 'Unknown',
                 'message': m.message,
                 'timestamp': m.timestamp.isoformat()

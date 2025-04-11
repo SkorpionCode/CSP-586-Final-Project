@@ -8,7 +8,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False, index=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)  # hashed password
+    password = db.Column(db.String(200), nullable=False)  
     role = db.Column(db.String(20), default='viewer')  # viewer, streamer, admin
     profile_picture = db.Column(db.String(200))
     bio = db.Column(db.Text)
@@ -38,8 +38,8 @@ class Follow(db.Model):
 class Report(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     reporter_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    stream_id = db.Column(db.Integer, db.ForeignKey('stream.id'))  # can be NULL for user reports
-    reported_user_id = db.Column(db.Integer, db.ForeignKey('user.id')) # can be NULL for stream reports
+    stream_id = db.Column(db.Integer, db.ForeignKey('stream.id'))  
+    reported_user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
     description = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     active = db.Column(db.Boolean, default=True)
@@ -57,4 +57,4 @@ class Notification(db.Model):
     report_id = db.Column(db.Integer, db.ForeignKey('report.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     reporter_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    type = db.Column(db.String(20)) # user_suspended, report_denied
+    type = db.Column(db.String(20)) 
