@@ -21,6 +21,7 @@ function Login() {
         localStorage.setItem('role', response.data.role)
       }
       navigate('/browse');
+      window.location.reload();
     } catch (error) {
       alert('Login failed: ' + (error.response?.data?.msg || 'Error'));
     }

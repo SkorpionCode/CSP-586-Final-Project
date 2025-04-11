@@ -8,6 +8,7 @@ const Header = () => {
   // Retrieve the token and username from localStorage.
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('username') || 'Guest';
+  const role = localStorage.getItem('role');
 
   const handleLogout = async () => {
     try {
@@ -28,6 +29,7 @@ const Header = () => {
     localStorage.removeItem('role');
     // Navigate to the login page.
     navigate('/login');
+    window.location.reload()
   };
 
   return (
@@ -66,10 +68,30 @@ const Header = () => {
               Become Streamer
             </button>
             <button
+              onClick={() => navigate('/become-admin')}
+              style={{ marginRight: '0.5rem' }}
+            >
+              Become Admin
+            </button>
+            {role === 'admin' && (
+              <button
+                onClick={() => navigate('/admin/reports')}
+                style={{ marginRight: '0.5rem' }}
+              >
+                View Reports
+              </button>
+            )}
+            <button
               onClick={() => navigate('/browse')}
               style={{ marginRight: '0.5rem' }}
             >
               Browse Streams
+            </button>
+            <button
+              onClick={() => navigate('/report')}
+              style={{ marginRight: '0.5rem' }}
+            >
+              Report
             </button>
           </div>
         </>

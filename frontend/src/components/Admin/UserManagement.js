@@ -3,18 +3,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function UserManagement() {
-  const [userId, setUserId] = useState('');
+  const [username, setUsername] = useState('');
   const token = localStorage.getItem('token');
+  const adminUsername = localStorage.getItem('username');
 
-  const handleSuspend = async () => {
+  const handleUnsuspend = async () => {
     try {
-      await axios.post(`http://localhost:5000/admin/suspend/${userId}`, {}, {
+      await axios.post(`http://localhost:5000/admin/unsuspend/${username}?admin_username=${adminUsername}`, {}, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      alert(`User ${userId} has been suspended`);
-      setUserId('');
+      alert(`User ${username} has been unsuspended.`);
+      setUsername('');
     } catch (error) {
-      alert('Error suspending user');
+      alert('Error unsuspending user');
     }
   };
 
@@ -22,15 +23,15 @@ function UserManagement() {
     <div>
       <h2>User Management</h2>
       <label>
-        User ID to Suspend:
-        <input 
-          type="text" 
-          value={userId} 
-          onChange={(e) => setUserId(e.target.value)} 
+        Username to Unsuspend:
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </label>
       <br />
-      <button onClick={handleSuspend}>Suspend User</button>
+      <button onClick={handleUnsuspend}>Unsuspend User</button>
     </div>
   );
 }
