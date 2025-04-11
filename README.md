@@ -1,4 +1,4 @@
-# Live Streaming & Chat Platform
+# Digital Marketing (Streaming Platform for Hot Gadgets)
 
 A full‑stack web application that provides a live streaming platform with multiple user roles (Viewer, Streamer, Admin). The application features live streaming (using OBS and RTMP/HLS), real‑time chat, content reporting, profile management, and administrative actions – all built with a Flask backend and React frontend styled with Material‑UI.
 
