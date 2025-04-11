@@ -1,15 +1,18 @@
 # CSP-586-Final-Project
-Digital Marketing (Streaming platform for hot gadgets)
+Digital Marketing (Streaming Platform for Hot Gadgets)
 
 ## Backend
 
 backend/
+- instance/
+- - streaming.db
 - app.py
 - models.py
 - database.py
 - requirements.txt
  
- ## Frontend
+## Frontend
+
 frontend/
 - src/
 - - App.js
@@ -23,12 +26,14 @@ frontend/
 - - - - Login.js
 - - - - Signup.js
 - - - Common
+- - - - Header.js
 - - - - NotificationsDisplay.js
 - - - Streamer
 - - - - ChannelSetup.js
 - - - - GoLive.js
 - - - - ScheduleStream.js
 - - - Viewer
+- - - - BecomeAdmin.js
 - - - - BecomeStreamer.js
 - - - - BrowseStreams.js
 - - - - Chat.js
