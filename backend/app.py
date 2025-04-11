@@ -1,6 +1,5 @@
 # app.py
 from flask import Flask, request, jsonify, send_from_directory
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from flask_cors import CORS
 from flask_socketio import SocketIO, join_room, leave_room, emit
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -26,24 +25,11 @@ def create_app():
 
     # Initialize extensions
     db.init_app(app)
-    jwt = JWTManager(app)
     socketio.init_app(app)
 
     # Create database tables if they don't exist
     with app.app_context():
         db.create_all()
-
-    @jwt.unauthorized_loader
-    def unauthorized_response(callback):
-        return jsonify({'msg': 'Missing or invalid authorization header'}), 422
-
-    @jwt.invalid_token_loader
-    def invalid_token_response(callback):
-        return jsonify({'msg': 'Invalid token'}), 422
-
-    @jwt.expired_token_loader
-    def expired_token_callback(jwt_header, jwt_payload):
-        return jsonify({'msg': 'Token has expired'}), 422
     
     # --- Serve HLS files from the /hls folder ---
     @app.route('/live/<path:filename>')
@@ -79,8 +65,7 @@ def create_app():
             return jsonify({'msg': 'Invalid credentials'}), 401
         if user.suspended:
             return jsonify({'msg': 'Account suspended'}), 403
-        access_token = create_access_token(identity=user.id)
-        return jsonify({'access_token': access_token, 'role': user.role, 'user_id': user.id, 'username': user.username, 'email': user.email}), 200
+        return jsonify({'role': user.role, 'user_id': user.id, 'username': user.username, 'email': user.email}), 200
 
     @app.route('/logout', methods=['POST'])
     def logout():
@@ -121,10 +106,11 @@ def create_app():
         return jsonify(result), 200
 
     @app.route('/follow', methods=['POST'])
-    @jwt_required()
     def follow_streamer():
-        user_id = get_jwt_identity()
         data = request.get_json()
+        username = data.get('username')
+        user = User.query.filter_by(username=username).first()
+        user_id = user.id
         streamer_id = data.get('streamer_id')
         follow = Follow(viewer_id=user_id, streamer_id=streamer_id)
         db.session.add(follow)
